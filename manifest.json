@@ -1,10 +1,10 @@
 {
-  "name": "صيدلية الشفاء",
-  "short_name": "الشفاء",
+  "name": "صيدليه النور",
+  "short_name": "صيدليه النور",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#007bff",
+  "theme_color": "#2563eb",
   "icons": [
     {
       "src": "icon-192.png",
