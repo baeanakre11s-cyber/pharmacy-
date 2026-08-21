@@ -3,16 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>نظام ادارة الصيدلية</title>
-  <link rel="manifest" href="manifest.json">
+  <title>تسجيل دخول - صيدلية النور</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0d6efd">
 </head>
 <body>
-  <div id="app">
-    <h1>💊 نظام ادارة الصيدلية</h1>
-    <p>مرحبا! التطبيق جاهز للعمل</p>
-    <button onclick="alert('تم التشغيل بنجاح')">اضغط للتجربة</button>
+  <div class="login-container">
+    <div class="login-box">
+      <h1>💊 تسجيل دخول الصيدلية</h1>
+      <form id="loginForm">
+        <div class="input-group">
+          <label>اسم الصيدلية</label>
+          <input type="text" id="pharmacyName" placeholder="مثال: صيدلية النور" required>
+        </div>
+        <div class="input-group">
+          <label>اسم المستخدم</label>
+          <input type="text" id="username" placeholder="admin" required>
+        </div>
+        <div class="input-group">
+          <label>كلمة السر</label>
+          <input type="password" id="password" placeholder="1234" required>
+        </div>
+        <button type="submit" class="login-btn">دخول / انشاء حساب</button>
+      </form>
+    </div>
   </div>
 
   <script src="script.js"></script>
