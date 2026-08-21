@@ -3,38 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تسجيل دخول - صيدلية النور</title>
+  <title>نظام الصيدلية</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0d6efd">
 </head>
 <body>
   <div class="login-container">
     <div class="login-box">
-      <h1>💊 تسجيل دخول الصيدلية</h1>
+      <h1>تسجيل دخول الصيدلية 🔒</h1>
       <form id="loginForm">
-        <div class="input-group">
-          <label>اسم الصيدلية</label>
-          <input type="text" id="pharmacyName" placeholder="مثال: صيدلية النور" required>
-        </div>
-        <div class="input-group">
-          <label>اسم المستخدم</label>
-          <input type="text" id="username" placeholder="admin" required>
-        </div>
-        <div class="input-group">
-          <label>كلمة السر</label>
-          <input type="password" id="password" placeholder="1234" required>
-        </div>
-        <button type="submit" class="login-btn">دخول / انشاء حساب</button>
+        <input type="text" id="pharmacyName" placeholder="اسم الصيدلية" required>
+        <input type="text" id="username" placeholder="اسم المستخدم" required>
+        <input type="password" id="password" placeholder="كلمة السر" required>
+        <button type="submit">دخول / انشاء حساب</button>
+        <p class="note">اول مرة؟ اكتبي البيانات وراح يحفظ الحساب.</p>
       </form>
     </div>
   </div>
-
   <script src="script.js"></script>
-  <script>
-    if('serviceWorker' in navigator){
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
 </body>
 </html>
