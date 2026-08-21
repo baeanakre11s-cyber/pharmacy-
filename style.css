@@ -1,8 +1,10 @@
 body {
   margin: 0;
   font-family: 'Tahoma', sans-serif;
-background: url('bg.jpg') no-repeat center fixed;
+ background: linear-gradient(135deg, #0d6efd, #004aad);
+    background-attachment: fixed;
     background-size: cover;
+    color: white;
   display: flex;
   justify-content: center;
   align-items: center;
