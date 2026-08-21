@@ -1,21 +1,21 @@
 {
-  "name": "صيدليه النور",
-  "short_name": "صيدليه النور",
-  "description": "نظام اداره صيدليه النور",
+  "name": "Pharmacy",
+  "short_name": "Pharmacy",
+  "description": "Pharmacy App",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
   "icons": [
     {
-      "src": "./icon1-192.png",
+      "src": "pharmacy-icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/png"
     },
     {
-      "src": "./icon1-512.png",
+      "src": "pharmacy-icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/png"
     }
   ]
 }
