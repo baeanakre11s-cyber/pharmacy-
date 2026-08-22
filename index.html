@@ -6,65 +6,64 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#2563eb">
 <link rel="apple-touch-icon" href="pharmacy-icon-192.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:tahoma;background:#f5f5f5;font-size:18px;min-height:100vh}
+body{font-family:tahoma;background:#f5f5f5;font-size:16px}
 .hidden{display:none!important}
-.login{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.login-box{background:white;padding:50px 40px;border-radius:20px;width:95%;max-width:550px;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
-.login-box h2{text-align:center;margin-bottom:25px;color:#667eea;font-size:24px}
-.login-box input{width:100%;padding:16px;margin:12px 0;border:2px solid #ddd;border-radius:12px;font-size:18px}
-.login-box button{width:100%;padding:18px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:12px;font-size:20px;font-weight:bold;cursor:pointer;margin-top:12px}
-.activation{background:#ffebee;border:3px solid #f44336;padding:40px 30px;border-radius:20px;text-align:center}
-.activation h2{color:#f44336;margin-bottom:15px;font-size:22px}
-.activation p{margin-bottom:15px;font-size:18px}
-.pharmacy-name{font-size:14px;color:#666;margin-top:8px;text-align:center}
-.home{text-align:center;padding-top:120px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;color:white;padding:20px}
-.home h1{font-size:36px;margin-bottom:12px}
-.home p{font-size:18px;margin-bottom:35px;opacity:0.9}
-.btn-main{padding:30px 60px;margin:20px;font-size:24px;border:none;border-radius:20px;cursor:pointer;font-weight:bold;color:white;box-shadow:0 8px 20px rgba(0,0,0,0.2)}
+.login{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center}
+.login-box{background:white;padding:35px;border-radius:20px;width:90%;max-width:400px;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.login-box h2{text-align:center;margin-bottom:18px;color:#667eea;font-size:20px}
+.login-box input{width:100%;padding:12px;margin:10px 0;border:2px solid #ddd;border-radius:10px;font-size:16px}
+.login-box button{width:100%;padding:14px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:10px;font-size:17px;font-weight:bold;cursor:pointer;margin-top:10px}
+.activation{background:#ffebee;border:3px solid #f44336;padding:25px;border-radius:20px;text-align:center}
+.activation h2{color:#f44336;margin-bottom:12px;font-size:19px}
+.activation p{margin-bottom:12px;font-size:16px}
+.pharmacy-name{font-size:12px;color:#666;margin-top:5px;text-align:center}
+.home{text-align:center;padding-top:100px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;color:white}
+.home h1{font-size:28px;margin-bottom:10px}
+.home p{font-size:16px;margin-bottom:25px;opacity:0.9}
+.btn-main{padding:20px 40px;margin:15px;font-size:19px;border:none;border-radius:18px;cursor:pointer;font-weight:bold;color:white;box-shadow:0 8px 20px rgba(0,0,0,0.2)}
 .btn-admin{background:linear-gradient(135deg,#2e7d32,#1b5e20)}
 .btn-store{background:linear-gradient(135deg,#1976d2,#0d47a1)}
-.btn-red{background:#f44336;color:white;border:none;padding:12px 24px;border-radius:10px;cursor:pointer;font-size:16px}
-.admin-panel{padding:25px;background:#fff;min-height:100vh}
-.admin-header{background:linear-gradient(135deg,#2e7d32,#1b5e20);color:white;padding:20px;text-align:center;font-size:26px;font-weight:bold;border-radius:15px;margin-bottom:25px}
-.stats{display:flex;gap:15px;justify-content:center;margin:25px 0;flex-wrap:wrap}
-.stat-card{background:#e8f5e9;padding:20px 30px;border-radius:15px;text-align:center;font-weight:bold;color:#2e7d32;font-size:18px}
-.form-box{background:#f0f4ff;padding:25px;border-radius:15px;margin:25px 0}
-.form-box input,.form-box select{padding:12px;margin:8px;border-radius:10px;border:1px solid #ccc;font-size:16px}
-.btn-blue{background:#1976d2;color:white;border:none;padding:12px 24px;border-radius:10px;cursor:pointer;font-size:16px}
-.btn-green{background:#2e7d32;color:white;border:none;padding:12px 24px;border-radius:10px;cursor:pointer;font-size:16px}
-.btn-orange{background:#ff9800;color:white;border:none;padding:12px 24px;border-radius:10px;cursor:pointer;font-size:16px}
-.btn-purple{background:#9c27b0;color:white;border:none;padding:12px 24px;border-radius:10px;cursor:pointer;font-size:16px}
-table{width:100%;border-collapse:collapse;margin-top:15px;background:white;font-size:16px}
+.btn-red{background:#f44336;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:14px}
+.admin-panel{padding:15px;background:#fff;min-height:100vh}
+.admin-header{background:linear-gradient(135deg,#2e7d32,#1b5e20);color:white;padding:14px;text-align:center;font-size:21px;font-weight:bold;border-radius:12px;margin-bottom:15px}
+.stats{display:flex;gap:12px;justify-content:center;margin:15px 0;flex-wrap:wrap}
+.stat-card{background:#e8f5e9;padding:12px 20px;border-radius:12px;text-align:center;font-weight:bold;color:#2e7d32;font-size:15px}
+.form-box{background:#f0f4ff;padding:15px;border-radius:12px;margin:15px 0}
+.form-box input,.form-box select{padding:10px;margin:5px;border-radius:8px;border:1px solid #ccc;font-size:15px}
+.btn-blue{background:#1976d2;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:14px}
+.btn-green{background:#2e7d32;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:14px}
+.btn-orange{background:#ff9800;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:14px}
+.btn-purple{background:#9c27b0;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:14px}
+table{width:100%;border-collapse:collapse;margin-top:12px;background:white;font-size:14px}
 thead{background:#2e7d32;color:white}
-th,td{padding:14px;text-align:center;border:1px solid #ddd}
-.btn-del{background:#f44336;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:14px}
-.store-header{background:linear-gradient(135deg,#2563eb,#1e40af);color:white;padding:18px 25px;display:flex;justify-content:space-between;align-items:center}
-.store-banner{background:linear-gradient(135deg,#2563eb,#1e40af);color:white;padding:35px;text-align:center;font-size:24px;font-weight:bold}
-.search-box{padding:18px 20px;background:white}
-.search-box input{width:100%;padding:15px;border:2px solid #2563eb;border-radius:12px;font-size:18px}
-.categories{display:flex;gap:12px;padding:18px 20px;justify-content:flex-end;background:white;overflow-x:auto}
-.cat-btn{padding:10px 20px;background:#e2e8f0;border:none;border-radius:25px;cursor:pointer;font-weight:bold;font-size:16px}
+th,td{padding:10px;text-align:center;border:1px solid #ddd}
+.btn-del{background:#f44336;color:white;border:none;padding:6px 10px;border-radius:5px;cursor:pointer;font-size:12px}
+.store-header{background:linear-gradient(135deg,#2563eb,#1e40af);color:white;padding:12px 18px;display:flex;justify-content:space-between;align-items:center}
+.store-banner{background:linear-gradient(135deg,#2563eb,#1e40af);color:white;padding:25px;text-align:center;font-size:19px;font-weight:bold}
+.search-box{padding:12px 15px;background:white}
+.search-box input{width:100%;padding:11px;border:2px solid #2563eb;border-radius:10px;font-size:16px}
+.categories{display:flex;gap:8px;padding:12px 15px;justify-content:flex-end;background:white;overflow-x:auto}
+.cat-btn{padding:7px 15px;background:#e2e8f0;border:none;border-radius:18px;cursor:pointer;font-weight:bold;font-size:14px}
 .cat-btn.active{background:#2563eb;color:white}
-.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:25px;padding:25px;background:white}
-.product-card{background:#2563eb;border-radius:18px;padding:20px;text-align:center;color:white;box-shadow:0 4px 10px rgba(0,0,0,0.1)}
-.product-icon{font-size:70px;margin-bottom:10px;background:white;border-radius:12px;padding:20px;width:120px;height:120px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
-.product-desc{font-size:13px;margin:8px 0;height:40px;overflow:hidden;color:#e0e0e0}
-.product-name{font-weight:bold;font-size:18px;margin:8px 0}
-.product-price{font-size:20px;font-weight:bold;margin:10px 0}
-.btn-add{background:#2ecc71;color:white;border:none;padding:14px;width:100%;border-radius:10px;cursor:pointer;font-weight:bold;font-size:18px}
-.cart-side{position:fixed;right:-450px;top:0;width:450px;height:100%;background:white;padding:25px;transition:0.3s;box-shadow:-5px 0 20px rgba(0,0,0,0.2);z-index:999;overflow-y:auto}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px;padding:15px;background:white}
+.product-card{background:#2563eb;border-radius:12px;padding:12px;text-align:center;color:white;box-shadow:0 4px 10px rgba(0,0,0,0.1)}
+.product-icon{font-size:55px;margin-bottom:6px;background:white;border-radius:8px;padding:12px;width:90px;height:90px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.product-desc{font-size:11px;margin:5px 0;height:32px;overflow:hidden;color:#e0e0e0}
+.product-name{font-weight:bold;font-size:15px;margin:5px 0}
+.product-price{font-size:17px;font-weight:bold;margin:6px 0}
+.btn-add{background:#2ecc71;color:white;border:none;padding:10px;width:100%;border-radius:8px;cursor:pointer;font-weight:bold;font-size:16px}
+.cart-side{position:fixed;right:-380px;top:0;width:380px;height:100%;background:white;padding:18px;transition:0.3s;box-shadow:-5px 0 20px rgba(0,0,0,0.2);z-index:999;overflow-y:auto}
 .cart-side.open{right:0}
-.btn-whatsapp{background:#25D366;color:white;border:none;padding:18px;width:100%;border-radius:12px;font-size:20px;font-weight:bold;cursor:pointer;margin-top:18px}
-.whatsapp{position:fixed;bottom:20px;left:20px;background:#25D366;color:white;padding:14px 22px;border-radius:50px;text-decoration:none;font-weight:bold;font-size:16px}
+.btn-whatsapp{background:#25D366;color:white;border:none;padding:14px;width:100%;border-radius:10px;font-size:17px;font-weight:bold;cursor:pointer;margin-top:12px}
+.whatsapp{position:fixed;bottom:15px;left:15px;background:#25D366;color:white;padding:10px 18px;border-radius:50px;text-decoration:none;font-weight:bold;font-size:14px}
 </style>
 </head>
 <body>
 
-<!-- صفحة التفعيل -->
 <div id="activationPage" class="login hidden">
 <div class="login-box activation">
 <h2>🔒 انتهت الفترة التجريبية</h2>
@@ -72,11 +71,10 @@ th,td{padding:14px;text-align:center;border:1px solid #ddd}
 <p>للاستمرار يرجى ادخال كود التفعيل</p>
 <input id="activationCode" placeholder="ادخل كود التفعيل هنا">
 <button onclick="checkActivation()">تفعيل النظام</button>
-<p style="font-size:14px;color:#666">للحصول على الكود تواصلي مع الدعم: 0750xxxxxxx</p>
+<p style="font-size:12px;color:#666">للحصول على الكود تواصلي مع الدعم: 0750xxxxxxx</p>
 </div>
 </div>
 
-<!-- صفحة تسجيل الدخول -->
 <div id="loginPage" class="login">
 <div class="login-box">
 <h2>🔐 تسجيل دخول الصيدلية</h2>
@@ -98,7 +96,7 @@ th,td{padding:14px;text-align:center;border:1px solid #ddd}
 
 <div id="adminPage" class="admin-panel hidden">
 <div class="admin-header">📦 لوحة تحكم <span id="adminPharmacyName"></span></div>
-<button style="background:#999;color:white;padding:10px 18px;border:none;border-radius:10px;font-size:16px" onclick="backHome()">الرجوع للرئيسية</button>
+<button style="background:#999;color:white;padding:8px 14px;border:none;border-radius:8px" onclick="backHome()">الرجوع للرئيسية</button>
 <div class="stats">
 <div class="stat-card">📦 عدد الادوية: <span id="drugCount">0</span></div>
 <div class="stat-card">💰 قيمة المخزون: <span id="stockVal">0</span> د</div>
@@ -120,7 +118,7 @@ th,td{padding:14px;text-align:center;border:1px solid #ddd}
 <input type="file" id="restoreInput" accept=".json" style="display:none" onchange="importData(event)">
 <button class="btn-orange" onclick="window.print()">طباعة</button>
 </div>
-<input id="searchAdmin" onkeyup="searchAdmin()" placeholder="🔍 ابحث باسم الدواء او الشركة..." style="width:100%;padding:14px;border:2px solid #2e7d32;border-radius:10px;margin-bottom:15px;font-size:18px">
+<input id="searchAdmin" onkeyup="searchAdmin()" placeholder="🔍 ابحث باسم الدواء او الشركة..." style="width:100%;padding:11px;border:2px solid #2e7d32;border-radius:10px;margin-bottom:12px;font-size:16px">
 <table>
 <thead><tr><th>#</th><th>الاسم</th><th>الشركة</th><th>الفئة</th><th>شراء</th><th>بيع</th><th>كمية</th><th>حذف</th></tr></thead>
 <tbody id="adminTable"></tbody>
@@ -129,9 +127,9 @@ th,td{padding:14px;text-align:center;border:1px solid #ddd}
 
 <div id="storePage" class="hidden">
 <div class="store-header">
-<button style="background:#475569;color:white;border:none;padding:10px 18px;border-radius:25px;font-size:16px" onclick="backHome()">رجوع</button>
-<div style="font-size:22px;font-weight:bold">💎 <span id="storePharmacyName">صيدليتنا</span></div>
-<button style="background:white;color:#2563eb;padding:10px 20px;border-radius:25px;border:none;font-size:16px" onclick="document.getElementById('cartSide').classList.toggle('open')">السلة (<span id="cartCount">0</span>) 🛒</button>
+<button style="background:#475569;color:white;border:none;padding:8px 14px;border-radius:20px" onclick="backHome()">رجوع</button>
+<div style="font-size:18px;font-weight:bold">💎 <span id="storePharmacyName">صيدليتنا</span></div>
+<button style="background:white;color:#2563eb;padding:8px 16px;border-radius:20px;border:none" onclick="document.getElementById('cartSide').classList.toggle('open')">السلة (<span id="cartCount">0</span>) 🛒</button>
 </div>
 <div class="store-banner">مرحبا بك في <span id="storeBannerName">صيدليتنا</span> الالكترونية</div>
 <div class="search-box">
@@ -146,9 +144,9 @@ th,td{padding:14px;text-align:center;border:1px solid #ddd}
 </div>
 <div class="products" id="productsGrid"></div>
 <div class="cart-side" id="cartSide">
-<h3 style="font-size:22px">سلة المشتريات</h3>
+<h3>سلة المشتريات</h3>
 <div id="cartItems"></div>
-<h3 style="font-size:20px">الاجمالي: <span id="totalPrice">0</span> د</h3>
+<h3>الاجمالي: <span id="totalPrice">0</span> د</h3>
 <button class="btn-whatsapp" onclick="sendOrderWhatsApp()">📱 اطلب عبر واتساب</button>
 <button class="btn-orange" onclick="printInvoice()" style="margin-top:10px">🖨️ طباعة فاتورة</button>
 </div>
@@ -156,235 +154,31 @@ th,td{padding:14px;text-align:center;border:1px solid #ddd}
 </div>
 
 <script>
-let DRUGS = [];
-let CART = [];
-let CURRENT_FILTER = 'all';
-let PHARMACY_DATA = {};
-const VALID_CODE = "PHARMA2026";
-
-function checkActivation(){
-let code = activationCode.value.trim();
-if(code === VALID_CODE){
-localStorage.setItem('activated', 'true');
-location.reload();
-} else {
-alert("كود التفعيل غير صحيح");
-}
-}
-
-function checkTrial(){
-let activated = localStorage.getItem('activated');
-if(activated === 'true') return true;
-let installDate = localStorage.getItem('installDate');
-if(!installDate){
-installDate = new Date().getTime();
-localStorage.setItem('installDate', installDate);
-}
-let daysPassed = (new Date().getTime() - installDate) / (1000*60*60*24);
-if(daysPassed > 3){
-loginPage.classList.add('hidden');
-homePage.classList.add('hidden');
-activationPage.classList.remove('hidden');
-return false;
-}
-return true;
-}
-
-function login(){
-let name = pharmacyName.value.trim();
-let user = userName.value.trim();
-let pass = userPass.value.trim();
-if(!name ||!user ||!pass){alert("املي كل الحقول"); return;}
-
-PHARMACY_DATA = {name, user, pass};
-localStorage.setItem('pharmacyData', JSON.stringify(PHARMACY_DATA));
-
-pharmacyTitle.innerText = name;
-adminPharmacyName.innerText = name;
-storePharmacyName.innerText = name;
-storeBannerName.innerText = name;
-welcomeMsg.innerText = `مرحبا بك في ${name}`;
-
-if(checkTrial()){
-loginPage.classList.add('hidden');
-homePage.classList.remove('hidden');
-}
-loadFromLocal();
-}
-
-function logout(){
-localStorage.clear();
-location.reload();
-}
-
-function loadFromLocal(){
-let saved = localStorage.getItem('pharmacyData');
-if(saved){
-PHARMACY_DATA = JSON.parse(saved);
-pharmacyTitle.innerText = PHARMACY_DATA.name;
-adminPharmacyName.innerText = PHARMACY_DATA.name;
-storePharmacyName.innerText = PHARMACY_DATA.name;
-storeBannerName.innerText = PHARMACY_DATA.name;
-welcomeMsg.innerText = `مرحبا بك في ${PHARMACY_DATA.name}`;
-if(checkTrial()){
-loginPage.classList.add('hidden');
-homePage.classList.remove('hidden');
-}
-}
-
-let drugs = localStorage.getItem('drugsData');
-if(drugs) DRUGS = JSON.parse(drugs);
-}
-
-function exportData(){
-let data = {drugs: DRUGS, pharmacy: PHARMACY_DATA};
-let blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
-let url = URL.createObjectURL(blob);
-let a = document.createElement('a');
-a.href = url;
-a.download = PHARMACY_DATA.name + '_backup.json';
-a.click();
-alert("تم تصدير النسخة الاحتياطية");
-}
-
-function importData(e){
-let file = e.target.files[0];
-let reader = new FileReader();
-reader.onload = function(event){
-let data = JSON.parse(event.target.result);
-DRUGS = data.drugs || [];
-PHARMACY_DATA = data.pharmacy || PHARMACY_DATA;
-localStorage.setItem('drugsData', JSON.stringify(DRUGS));
-localStorage.setItem('pharmacyData', JSON.stringify(PHARMACY_DATA));
-loadFromLocal(); loadAdmin(); loadStore();
-alert("تم استعادة البيانات بنجاح");
-}
-reader.readAsText(file);
-}
-
-function saveToLocal(){
-localStorage.setItem('drugsData', JSON.stringify(DRUGS));
-}
-
+let DRUGS = [];let CART = [];let CURRENT_FILTER = 'all';let PHARMACY_DATA = {};const VALID_CODE = "PHARMA2026";
+function checkActivation(){let code = activationCode.value.trim();if(code === VALID_CODE){localStorage.setItem('activated', 'true');location.reload();} else {alert("كود التفعيل غير صحيح");}}
+function checkTrial(){let activated = localStorage.getItem('activated');if(activated === 'true') return true;let installDate = localStorage.getItem('installDate');if(!installDate){installDate = new Date().getTime();localStorage.setItem('installDate', installDate);}let daysPassed = (new Date().getTime() - installDate) / (1000*60*60*24);if(daysPassed > 3){loginPage.classList.add('hidden');homePage.classList.add('hidden');activationPage.classList.remove('hidden');return false;}return true;}
+function login(){let name = pharmacyName.value.trim();let user = userName.value.trim();let pass = userPass.value.trim();if(!name ||!user ||!pass){alert("املي كل الحقول"); return;}PHARMACY_DATA = {name, user, pass};localStorage.setItem('pharmacyData', JSON.stringify(PHARMACY_DATA));pharmacyTitle.innerText = name;adminPharmacyName.innerText = name;storePharmacyName.innerText = name;storeBannerName.innerText = name;welcomeMsg.innerText = `مرحبا بك في ${name}`;if(checkTrial()){loginPage.classList.add('hidden');homePage.classList.remove('hidden');}loadFromLocal();}
+function logout(){localStorage.clear();location.reload();}
+function loadFromLocal(){let saved = localStorage.getItem('pharmacyData');if(saved){PHARMACY_DATA = JSON.parse(saved);pharmacyTitle.innerText = PHARMACY_DATA.name;adminPharmacyName.innerText = PHARMACY_DATA.name;storePharmacyName.innerText = PHARMACY_DATA.name;storeBannerName.innerText = PHARMACY_DATA.name;welcomeMsg.innerText = `مرحبا بك في ${PHARMACY_DATA.name}`;if(checkTrial()){loginPage.classList.add('hidden');homePage.classList.remove('hidden');}}let drugs = localStorage.getItem('drugsData');if(drugs) DRUGS = JSON.parse(drugs);}
+function exportData(){let data = {drugs: DRUGS, pharmacy: PHARMACY_DATA};let blob = new Blob([JSON.stringify(data)], {type: 'application/json'});let url = URL.createObjectURL(blob);let a = document.createElement('a');a.href = url;a.download = PHARMACY_DATA.name + '_backup.json';a.click();alert("تم تصدير النسخة الاحتياطية");}
+function importData(e){let file = e.target.files[0];let reader = new FileReader();reader.onload = function(event){let data = JSON.parse(event.target.result);DRUGS = data.drugs || [];PHARMACY_DATA = data.pharmacy || PHARMACY_DATA;localStorage.setItem('drugsData', JSON.stringify(DRUGS));localStorage.setItem('pharmacyData', JSON.stringify(PHARMACY_DATA));loadFromLocal(); loadAdmin(); loadStore();alert("تم استعادة البيانات بنجاح");}reader.readAsText(file);}
+function saveToLocal(){localStorage.setItem('drugsData', JSON.stringify(DRUGS));}
 function showAdmin(){homePage.classList.add('hidden');adminPage.classList.remove('hidden');loadAdmin();}
 function showStore(){homePage.classList.add('hidden');storePage.classList.remove('hidden');loadStore();}
 function backHome(){adminPage.classList.add('hidden');storePage.classList.add('hidden');homePage.classList.remove('hidden');}
-
-function importExcel(e){
-let file = e.target.files[0];
-if(!file) return;
-let reader = new FileReader();
-reader.onload = function(event){
-let data = new Uint8Array(event.target.result);
-let workbook = XLSX.read(data, {type:'array'});
-let sheet = workbook.Sheets[workbook.SheetNames[0]];
-let json = XLSX.utils.sheet_to_json(sheet);
-DRUGS = json.map(x=>({n:x["اسم الدواء"]||"",c:x["الشركة"]||"",cat:x["الفئة"]||"مسكنات",b:+x["سعر الشراء"]||0,s:+x["سعر البيع"]||0,q:+x["الكمية"]||0,desc:x["الوصف"]||""}));
-saveToLocal(); loadAdmin(); loadStore(); alert("تم استيراد "+DRUGS.length+" دواء بنجاح");
-}
-reader.readAsArrayBuffer(file);
-}
-
-function add10(){
-DRUGS = [
-{n:"بندول اكسترا",c:"GSK",cat:"مسكنات",b:1200,s:3000,q:20, desc:"مسكن قوي للصداع"},
-{n:"ديكلون 100",c:"Novartis",cat:"مسكنات",b:1500,s:3000,q:15, desc:"مسكن لالام المفاصل"},
-{n:"فولتارين 50",c:"Novartis",cat:"مسكنات",b:1000,s:2500,q:10, desc:"مضاد التهاب"},
-{n:"بروفين 400",c:"Abbott",cat:"مسكنات",b:800,s:2000,q:30, desc:"مسكن وخافض حرارة"},
-{n:"بندول 500",c:"GSK",cat:"مسكنات",b:500,s:1500,q:50, desc:"مسكن للصداع"},
-{n:"اموكسيل 500",c:"GSK",cat:"مضاد حيوي",b:2000,s:5000,q:20, desc:"مضاد حيوي"},
-{n:"فلاجيل 500",c:"Sanofi",cat:"مضاد حيوي",b:1000,s:3000,q:25, desc:"لعلاج الاسهال"},
-{n:"فيتامين C",c:"Bayer",cat:"فيتامينات",b:2000,s:5000,q:40, desc:"مقوي مناعة"},
-{n:"حديد فوليك",c:"Tabuk",cat:"فيتامينات",b:1500,s:4000,q:30, desc:"لعلاج فقر الدم"},
-{n:"شراب كحة",c:"Julphar",cat:"معدة",b:1000,s:3500,q:25, desc:"مهدئ للسعال"}
-];
-saveToLocal(); loadAdmin(); loadStore(); alert("تم اضافة 10 ادوية");
-}
-
-function addDrug(){
-if(!dName.value ||!dSell.value ||!dQty.value){alert("كملي البيانات");return}
-DRUGS.push({n:dName.value,c:dCompany.value,cat:dCat.value,b:+dBuy.value,s:+dSell.value,q:+dQty.value, desc:""});
-dName.value=dCompany.value=dBuy.value=dSell.value=dQty.value="";
-saveToLocal(); loadAdmin(); loadStore();
-}
-function loadAdmin(){
-adminTable.innerHTML=""; let stock=0;
-DRUGS.forEach((x,i)=>{
-stock+=x.b*x.q;
-adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td>${x.q}</td><td><button class="btn-del" onclick="delDrug(${i})">حذف</button></td></tr>`
-});
-drugCount.innerText=DRUGS.length; stockVal.innerText=stock.toLocaleString();
-}
+function importExcel(e){let file = e.target.files[0];if(!file) return;let reader = new FileReader();reader.onload = function(event){let data = new Uint8Array(event.target.result);let workbook = XLSX.read(data, {type:'array'});let sheet = workbook.Sheets[workbook.SheetNames[0]];let json = XLSX.utils.sheet_to_json(sheet);DRUGS = json.map(x=>({n:x["اسم الدواء"]||"",c:x["الشركة"]||"",cat:x["الفئة"]||"مسكنات",b:+x["سعر الشراء"]||0,s:+x["سعر البيع"]||0,q:+x["الكمية"]||0,desc:x["الوصف"]||""}));saveToLocal(); loadAdmin(); loadStore(); alert("تم استيراد "+DRUGS.length+" دواء بنجاح");}reader.readAsArrayBuffer(file);}
+function add10(){DRUGS = [{n:"بندول اكسترا",c:"GSK",cat:"مسكنات",b:1200,s:3000,q:20, desc:"مسكن قوي للصداع"},{n:"ديكلون 100",c:"Novartis",cat:"مسكنات",b:1500,s:3000,q:15, desc:"مسكن لالام المفاصل"},{n:"فولتارين 50",c:"Novartis",cat:"مسكنات",b:1000,s:2500,q:10, desc:"مضاد التهاب"},{n:"بروفين 400",c:"Abbott",cat:"مسكنات",b:800,s:2000,q:30, desc:"مسكن وخافض حرارة"},{n:"بندول 500",c:"GSK",cat:"مسكنات",b:500,s:1500,q:50, desc:"مسكن للصداع"},{n:"اموكسيل 500",c:"GSK",cat:"مضاد حيوي",b:2000,s:5000,q:20, desc:"مضاد حيوي"},{n:"فلاجيل 500",c:"Sanofi",cat:"مضاد حيوي",b:1000,s:3000,q:25, desc:"لعلاج الاسهال"},{n:"فيتامين C",c:"Bayer",cat:"فيتامينات",b:2000,s:5000,q:40, desc:"مقوي مناعة"},{n:"حديد فوليك",c:"Tabuk",cat:"فيتامينات",b:1500,s:4000,q:30, desc:"لعلاج فقر الدم"},{n:"شراب كحة",c:"Julphar",cat:"معدة",b:1000,s:3500,q:25, desc:"مهدئ للسعال"}];saveToLocal(); loadAdmin(); loadStore(); alert("تم اضافة 10 ادوية");}
+function addDrug(){if(!dName.value ||!dSell.value ||!dQty.value){alert("كملي البيانات");return}DRUGS.push({n:dName.value,c:dCompany.value,cat:dCat.value,b:+dBuy.value,s:+dSell.value,q:+dQty.value, desc:""});dName.value=dCompany.value=dBuy.value=dSell.value=dQty.value="";saveToLocal(); loadAdmin(); loadStore();}
+function loadAdmin(){adminTable.innerHTML=""; let stock=0;DRUGS.forEach((x,i)=>{stock+=x.b*x.q;adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td>${x.q}</td><td><button class="btn-del" onclick="delDrug(${i})">حذف</button></td></tr>`});drugCount.innerText=DRUGS.length; stockVal.innerText=stock.toLocaleString();}
 function delDrug(i){DRUGS.splice(i,1); saveToLocal(); loadAdmin(); loadStore();}
-function searchAdmin(){
-let val = searchAdmin.value.toLowerCase();
-let filtered = DRUGS.filter(x => x.n.toLowerCase().includes(val) || x.c.toLowerCase().includes(val));
-adminTable.innerHTML=""; let stock=0;
-filtered.forEach((x,i)=>{
-stock+=x.b*x.q;
-adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td>${x.q}</td><td><button class="btn-del" onclick="delDrug(${DRUGS.indexOf(x)})">حذف</button></td></tr>`
-});
-}
-
-function loadStore(){
-let f = CURRENT_FILTER=='all'? DRUGS : DRUGS.filter(x=>x.cat==CURRENT_FILTER);
-productsGrid.innerHTML=f.filter(x=>x.q>0).map(x=>`
-<div class="product-card">
-<div class="product-icon">💊</div>
-<div class="product-name">${x.n}</div>
-<div style="font-size:14px">${x.c}</div>
-<div class="product-desc">${x.desc}</div>
-<div class="product-price">${x.s} دينار</div>
-<div>${x.q} متوفر</div>
-<button class="btn-add" onclick="addToCart('${x.n}')">+ اضافة للسلة</button>
-</div>`).join("");
-}
-function filterCat(cat,btn){
-CURRENT_FILTER = cat;
-document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
-btn.classList.add('active');
-loadStore();
-}
-function searchStore(){
-let val = searchStore.value.toLowerCase();
-let f = CURRENT_FILTER=='all'? DRUGS : DRUGS.filter(x=>x.cat==CURRENT_FILTER);
-let filtered = f.filter(x => x.n.toLowerCase().includes(val));
-productsGrid.innerHTML=filtered.filter(x=>x.q>0).map(x=>`<div class="product-card"><div class="product-icon">💊</div><div class="product-name">${x.n}</div><div style="font-size:14px">${x.c}</div><div class="product-desc">${x.desc}</div><div class="product-price">${x.s} دينار</div><div>${x.q} متوفر</div><button class="btn-add" onclick="addToCart('${x.n}')">+ اضافة للسلة</button></div>`).join("");
-}
-function addToCart(name){
-let drug = DRUGS.find(x=>x.n==name);
-if(drug.q <= 0){alert("المنتج نفذ"); return;}
-let item = CART.find(x=>x.n==name);
-if(item) item.q++; else CART.push({n:name,p:drug.s,q:1});
-drug.q--;
-updateCart(); loadStore(); loadAdmin(); saveToLocal();
-}
-function updateCart(){
-cartCount.innerText=CART.reduce((a,b)=>a+b.q,0);
-totalPrice.innerText=CART.reduce((a,b)=>a+b.p*b.q,0).toLocaleString();
-cartItems.innerHTML=CART.map(x=>`<div style="padding:12px;border-bottom:1px solid #eee;font-size:17px">${x.n} x ${x.q} = ${(x.p*x.q).toLocaleString()} د</div>`).join("");
-}
-function sendOrderWhatsApp(){
-if(CART.length==0){alert("السلة فارغة"); return;}
-let msg = `مرحبا اريد اطلب من ${PHARMACY_DATA.name}:\n\n`;
-CART.forEach(x => {msg += `${x.n} x ${x.q} = ${(x.p*x.q).toLocaleString()} د.ع\n`;});
-msg += `\nالمجموع الكلي: ${CART.reduce((a,b)=>a+b.p*b.q,0).toLocaleString()} د.ع`;
-window.open(`https://wa.me/9647502458975?text=${encodeURIComponent(msg)}`);
-}
-function printInvoice(){
-if(CART.length==0){alert("السلة فارغة"); return;}
-let total = CART.reduce((a,b)=>a+b.p*b.q,0);
-let invoice = `<h2 style="text-align:center">💎 فاتورة ${PHARMACY_DATA.name}</h2><p style="text-align:center">التاريخ: ${new Date().toLocaleDateString('ar-IQ')}</p><hr><table style="width:100%;border-collapse:collapse"><thead><tr><th style="border:1px solid #000;padding:8px">الصنف</th><th style="border:1px solid #000;padding:8px">الكمية</th><th style="border:1px solid #000;padding:8px">السعر</th><th style="border:1px solid #000;padding:8px">المجموع</th></tr></thead><tbody>`;
-CART.forEach(x=>{invoice += `<tr><td style="border:1px solid #000;padding:8px">${x.n}</td><td style="border:1px solid #000;padding:8px">${x.q}</td><td style="border:1px solid #000;padding:8px">${x.p} د</td><td style="border:1px solid #000;padding:8px">${(x.p*x.q)} د</td></tr>`});
-invoice += `</tbody></table><h3 style="text-align:left;margin-top:15px">المجموع الكلي: ${total.toLocaleString()} دينار</h3><p style="text-align:center;margin-top:20px">شكرا لتسوقكم معنا 🌹</p>`;
-let win = window.open('', '', 'height=700,width=800');
-win.document.write('<html><head><title>فاتورة</title><meta charset="UTF-8"></head><body style="font-family:tahoma;padding:20px">');
-win.document.write(invoice);
-win.document.write('</body></html>');
-win.document.close();
-win.print();
-}
-
+function searchAdmin(){let val = searchAdmin.value.toLowerCase();let filtered = DRUGS.filter(x => x.n.toLowerCase().includes(val) || x.c.toLowerCase().includes(val));adminTable.innerHTML=""; let stock=0;filtered.forEach((x,i)=>{stock+=x.b*x.q;adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td>${x.q}</td><td><button class="btn-del" onclick="delDrug(${DRUGS.indexOf(x)})">حذف</button></td></tr>`});}
+function loadStore(){let f = CURRENT_FILTER=='all'? DRUGS : DRUGS.filter(x=>x.cat==CURRENT_FILTER);productsGrid.innerHTML=f.filter(x=>x.q>0).map(x=>`<div class="product-card"><div class="product-icon">💊</div><div class="product-name">${x.n}</div><div style="font-size:12px">${x.c}</div><div class="product-desc">${x.desc}</div><div class="product-price">${x.s} دينار</div><div>${x.q} متوفر</div><button class="btn-add" onclick="addToCart('${x.n}')">+ اضافة للسلة</button></div>`).join("");}
+function filterCat(cat,btn){CURRENT_FILTER = cat;document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');loadStore();}
+function searchStore(){let val = searchStore.value.toLowerCase();let f = CURRENT_FILTER=='all'? DRUGS : DRUGS.filter(x=>x.cat==CURRENT_FILTER);let filtered = f.filter(x => x.n.toLowerCase().includes(val));productsGrid.innerHTML=filtered.filter(x=>x.q>0).map(x=>`<div class="product-card"><div class="product-icon">💊</div><div class="product-name">${x.n}</div><div style="font-size:12px">${x.c}</div><div class="product-desc">${x.desc}</div><div class="product-price">${x.s} دينار</div><div>${x.q} متوفر</div><button class="btn-add" onclick="addToCart('${x.n}')">+ اضافة للسلة</button></div>`).join("");}
+function addToCart(name){let drug = DRUGS.find(x=>x.n==name);if(drug.q <= 0){alert("المنتج نفذ"); return;}let item = CART.find(x=>x.n==name);if(item) item.q++; else CART.push({n:name,p:drug.s,q:1});drug.q--;updateCart(); loadStore(); loadAdmin(); saveToLocal();}
+function updateCart(){cartCount.innerText=CART.reduce((a,b)=>a+b.q,0);totalPrice.innerText=CART.reduce((a,b)=>a+b.p*b.q,0).toLocaleString();cartItems.innerHTML=CART.map(x=>`<div style="padding:10px;border-bottom:1px solid #eee">${x.n} x ${x.q} = ${(x.p*x.q).toLocaleString()} د</div>`).join("");}
+function sendOrderWhatsApp(){if(CART.length==0){alert("السلة فارغة"); return;}let msg = `مرحبا اريد اطلب من ${PHARMACY_DATA.name}:\n\n`;CART.forEach(x => {msg += `${x.n} x ${x.q} = ${(x.p*x.q).toLocaleString()} د.ع\n`;});msg += `\nالمجموع الكلي: ${CART.reduce((a,b)=>a+b.p*b.q,0).toLocaleString()} د.ع`;window.open(`https://wa.me/9647502458975?text=${encodeURIComponent(msg)}`);}
+function printInvoice(){if(CART.length==0){alert("السلة فارغة"); return;}let total = CART.reduce((a,b)=>a+b.p*b.q,0);let invoice = `<h2 style="text-align:center">💎 فاتورة ${PHARMACY_DATA.name}</h2><p style="text-align:center">التاريخ: ${new Date().toLocaleDateString('ar-IQ')}</p><hr><table style="width:100%;border-collapse:collapse"><thead><tr><th style="border:1px solid #000;padding:8px">الصنف</th><th style="border:1px solid #000;padding:8px">الكمية</th><th style="border:1px solid #000;padding:8px">السعر</th><th style="border:1px solid #000;padding:8px">المجموع</th></tr></thead><tbody>`;CART.forEach(x=>{invoice += `<tr><td style="border:1px solid #000;padding:8px">${x.n}</td><td style="border:1px solid #000;padding:8px">${x.q}</td><td style="border:1px solid #000;padding:8px">${x.p} د</td><td style="border:1px solid #000;padding:8px">${(x.p*x.q)} د</td></tr>`});invoice += `</tbody></table><h3 style="text-align:left;margin-top:15px">المجموع الكلي: ${total.toLocaleString()} دينار</h3><p style="text-align:center;margin-top:20px">شكرا لتسوقكم معنا 🌹</p>`;let win = window.open('', '', 'height=700,width=800');win.document.write('<html><head><title>فاتورة</title><meta charset="UTF-8"></head><body style="font-family:tahoma;padding:20px">');win.document.write(invoice);win.document.write('</body></html>');win.document.close();win.print();}
 loadFromLocal();
 </script>
 </body>
