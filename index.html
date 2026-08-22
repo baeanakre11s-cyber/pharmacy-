@@ -6,7 +6,7 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#2563eb">
 <link rel="apple-touch-icon" href="pharmacy-icon-192.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0", maximum-scale=F5.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -64,8 +64,7 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 .cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee;font-size:16px;gap:10px}
 .btn-cart-del{background:#f44336;color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;flex-shrink:0}
 .btn-chatgpt{background:#10a37f;color:white;border:none;padding:15px;width:100%;border-radius:12px;cursor:pointer;margin-top:10px;font-size:16px;font-weight:bold}
-{
-@media(max-width:768px){
+@media (max-width:768px){
 .products{grid-template-columns:repeat(2,1fr)}
 }
 </style>
@@ -149,7 +148,7 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 <input id="searchStore" onkeyup="searchStore()" placeholder="🔍 ابحث عن دواء...">
 </div>
 <div class="categories">
-    
+
 <button class="cat-btn active" onclick="filterCat('all',this)">الكل</button>
 <button class="cat-btn" onclick="filterCat('مسكنات',this)">مسكنات</button>
 <button class="cat-btn" onclick="filterCat('مضاد حيوي',this)">مضاد حيوي</button>
@@ -168,8 +167,7 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 </div>
 <a href="https://wa.me/964" target="_blank" class="whatsapp">💬 فريق الدعم</a>
 </div>
-.cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee;font-size:16px;gap:10px}
-.btn-cart-del{background:#f44336;color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;flex-shrink:0}
+
 <script>
 let DRUGS = [];
 let CART = [];
@@ -402,19 +400,6 @@ win.print();
 function removeFromCart(name){let item = CART.find(x=>x.n==name);if(item){let drug = DRUGS.find(x=>x.n==name);drug.q += item.q;CART = CART.filter(x=>x.n!=name);updateCart(); loadStore(); loadAdmin(); saveToLocal();}}
 loadFromLocal();
 function askChatGPT(){if(CART.length==0){alert("السلة فارغة");return;}let text="عندي هاي الادوية بالصيدلية وخلصت:\n\n";CART.forEach(x=>text+=`- ${x.n} ${x.q} حبة\n`);text+="\nاريد بدائل متوفرة لها بنفس التركيبة والجرعة تقريبا. اعطيني 3 بدائل لكل دواء";let url="https://chat.openai.com/?q="+encodeURIComponent(text);window.open(url,"_blank");}
-function searchStore(){
-  let val = document.getElementById("searchStore").value.toLowerCase();
-  let allCards = document.querySelectorAll(".product-card");
-  
-  allCards.forEach(card => {
-    let name = card.querySelector("h3").innerText.toLowerCase();
-    if(name.includes(val) || val == ""){
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-  });
-}
 </script>
 </body>
 </html>
