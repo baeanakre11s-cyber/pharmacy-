@@ -350,9 +350,9 @@ productsGrid.innerHTML = f.map(x=>`
 <div class="product-name">${x.n}</div>
 <div style="font-size:13px">${x.c}</div>
 <div class="product-desc">${x.desc}</div>
-<div class="product-price">${x.s} IQD</div>
-<div>Stock: ${x.q}</div>
-<button class="btn-add" onclick="addToCart('${x.n}')">+ Add to Cart</button>
+<div class="product-price">${x.s} دينار</div>
+<div>المخزون: ${x.q}</div>
+<button class="btn-add" onclick="addToCart('${x.n}')">+ اضف للسلة</button>
 </div>`).join('');
 }
 
