@@ -64,6 +64,7 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 .cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee;font-size:16px;gap:10px}
 .btn-cart-del{background:#f44336;color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;flex-shrink:0}
 .btn-chatgpt{background:#10a37f;color:white;border:none;padding:15px;width:100%;border-radius:12px;cursor:pointer;margin-top:10px;font-size:16px;font-weight:bold}
+.whatsapp{position:fixed;bottom:20px;left:20px;background:#25D366;color:white;padding:15px 20px;border-radius:50px;text-decoration:none;font-weight:bold;z-index:1000}
 @media (max-width:768px){
 .products{grid-template-columns:repeat(2,1fr)}
 }
@@ -71,7 +72,6 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 </head>
 <body>
 
-<!-- صفحة التفعيل -->
 <div id="activationPage" class="login hidden">
 <div class="login-box activation">
 <h2>🔒 انتهت الفترة التجريبية</h2>
@@ -83,7 +83,6 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 </div>
 </div>
 
-<!-- صفحة تسجيل الدخول -->
 <div id="loginPage" class="login">
 <div class="login-box">
 <h2>🔐 تسجيل دخول الصيدلية</h2>
@@ -148,7 +147,6 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 <input id="searchStore" onkeyup="searchStore()" placeholder="🔍 ابحث عن دواء...">
 </div>
 <div class="categories">
-
 <button class="cat-btn active" onclick="filterCat('all',this)">الكل</button>
 <button class="cat-btn" onclick="filterCat('مسكنات',this)">مسكنات</button>
 <button class="cat-btn" onclick="filterCat('مضاد حيوي',this)">مضاد حيوي</button>
@@ -161,7 +159,6 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 <div id="cartItems"></div>
 <h3 style="font-size:18px;margin:15px 0">الاجمالي: <span id="totalPrice">0</span> د</h3>
 <button class="btn-whatsapp" onclick="sendOrderWhatsApp()">📱 اطلب عبر واتساب</button>
-
 <button class="btn-orange" onclick="printInvoice()" style="margin-top:10px">🖨️ طباعة فاتورة</button>
 <button class="btn-chatgpt" onclick="askChatGPT()">اسأل ChatGPT عن البدائل</button>
 </div>
@@ -208,16 +205,13 @@ let name = pharmacyName.value.trim();
 let user = userName.value.trim();
 let pass = userPass.value.trim();
 if(!name ||!user ||!pass){alert("املي كل الحقول"); return;}
-
 PHARMACY_DATA = {name, user, pass};
 localStorage.setItem('pharmacyData', JSON.stringify(PHARMACY_DATA));
-
 pharmacyTitle.innerText = name;
 adminPharmacyName.innerText = name;
 storePharmacyName.innerText = name;
 storeBannerName.innerText = name;
 welcomeMsg.innerText = `مرحبا بك في ${name}`;
-
 if(checkTrial()){
 loginPage.classList.add('hidden');
 homePage.classList.remove('hidden');
@@ -244,7 +238,6 @@ loginPage.classList.add('hidden');
 homePage.classList.remove('hidden');
 }
 }
-
 let drugs = localStorage.getItem('drugsData');
 if(drugs) DRUGS = JSON.parse(drugs);
 }
@@ -320,6 +313,7 @@ DRUGS.push({n:dName.value,c:dCompany.value,cat:dCat.value,b:+dBuy.value,s:+dSell
 dName.value=dCompany.value=dBuy.value=dSell.value=dQty.value="";
 saveToLocal(); loadAdmin(); loadStore();
 }
+
 function loadAdmin(){
 adminTable.innerHTML=""; let stock=0;
 DRUGS.forEach((x,i)=>{
@@ -328,42 +322,51 @@ adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.
 });
 drugCount.innerText=DRUGS.length; stockVal.innerText=stock.toLocaleString();
 }
+
 function delDrug(i){DRUGS.splice(i,1); saveToLocal(); loadAdmin(); loadStore();}
+
 function searchAdmin(){
-let val = searchAdmin.value.toLowerCase();
+let val = document.getElementById('searchAdmin').value.toLowerCase();
 let filtered = DRUGS.filter(x => x.n.toLowerCase().includes(val) || x.c.toLowerCase().includes(val));
 adminTable.innerHTML=""; let stock=0;
 filtered.forEach((x,i)=>{
 stock+=x.b*x.q;
-adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td>${x.q}</td><td><button class="btn-del" onclick="delDrug(${DRUGS.indexOf(x)})">حذف</button></td></tr>`
+adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td>${x.q}</td><td><button class="btn-del" onclick="delDrug(${DRUGS.indexOf(x)})">حذف</button></td></tr>`;
 });
 }
 
-function loadStore(){
-let f = CURRENT_FILTER=='all'? DRUGS : DRUGS.filter(x=>x.cat==CURRENT_FILTER);
-productsGrid.innerHTML=f.filter(x=>x.q>0).map(x=>`
+function searchStore(){
+let val = document.getElementById('searchStore').value.toLowerCase();
+let f = CURRENT_FILTER==='all'? DRUGS : DRUGS.filter(x=>x.cat===CURRENT_FILTER);
+let filtered = f.filter(x=> x.n.toLowerCase().includes(val) || x.c.toLowerCase().includes(val));
+renderStore(filtered);
+}
+
+function renderStore(list=DRUGS){
+let f = list.filter(x=>x.q>0);
+productsGrid.innerHTML = f.map(x=>`
 <div class="product-card">
 <div class="product-icon">💊</div>
 <div class="product-name">${x.n}</div>
 <div style="font-size:13px">${x.c}</div>
 <div class="product-desc">${x.desc}</div>
-<div class="product-price">${x.s} دينار</div>
-<div>${x.q} متوفر</div>
-<button class="btn-add" onclick="addToCart('${x.n}')">+ اضافة للسلة</button>
-</div>`).join("");
+<div class="product-price">${x.s} IQD</div>
+<div>Stock: ${x.q}</div>
+<button class="btn-add" onclick="addToCart('${x.n}')">+ Add to Cart</button>
+</div>`).join('');
 }
+
+function loadStore(){
+renderStore(DRUGS);
+}
+
 function filterCat(cat,btn){
 CURRENT_FILTER = cat;
 document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
 btn.classList.add('active');
-loadStore();
+searchStore();
 }
-function searchStore(){
-let val = searchStore.value.toLowerCase();
-let f = CURRENT_FILTER=='all'? DRUGS : DRUGS.filter(x=>x.cat==CURRENT_FILTER);
-let filtered = f.filter(x => x.n.toLowerCase().includes(val));
-productsGrid.innerHTML=filtered.filter(x=>x.q>0).map(x=>`<div class="product-card"><div class="product-icon">💊</div><div class="product-name">${x.n}</div><div style="font-size:13px">${x.c}</div><div class="product-desc">${x.desc}</div><div class="product-price">${x.s} دينار</div><div>${x.q} متوفر</div><button class="btn-add" onclick="addToCart('${x.n}')">+ اضافة للسلة</button></div>`).join("");
-}
+
 function addToCart(name){
 let drug = DRUGS.find(x=>x.n==name);
 if(drug.q <= 0){alert("المنتج نفذ"); return;}
@@ -372,11 +375,27 @@ if(item) item.q++; else CART.push({n:name,p:drug.s,q:1});
 drug.q--;
 updateCart(); loadStore(); loadAdmin(); saveToLocal();
 }
+
 function updateCart(){
 cartCount.innerText=CART.reduce((a,b)=>a+b.q,0);
 totalPrice.innerText=CART.reduce((a,b)=>a+b.p*b.q,0).toLocaleString();
 cartItems.innerHTML=CART.map(x=>`<div class="cart-item"><span>${x.n} x ${x.q} = ${(x.p*x.q).toLocaleString()} د</span><button class="btn-cart-del" onclick="removeFromCart('${x.n}')">حذف</button></div>`).join("");
 }
+
+function removeFromCart(name){
+let item = CART.find(x=>x.n==name);
+if(item){
+let drug = DRUGS.find(x=>x.n==name);
+drug.q += item.q;
+CART = CART.filter(x=>x.n!=name);
+updateCart(); loadStore(); loadAdmin(); saveToLocal();
+}
+}
+
+function loadCart(){
+updateCart();
+}
+
 function sendOrderWhatsApp(){
 if(CART.length==0){alert("السلة فارغة"); return;}
 let msg = `مرحبا اريد اطلب من ${PHARMACY_DATA.name}:\n\n`;
@@ -384,6 +403,7 @@ CART.forEach(x => {msg += `${x.n} x ${x.q} = ${(x.p*x.q).toLocaleString()} د.ع
 msg += `\nالمجموع الكلي: ${CART.reduce((a,b)=>a+b.p*b.q,0).toLocaleString()} د.ع`;
 window.open(`https://wa.me/9647502458975?text=${encodeURIComponent(msg)}`);
 }
+
 function printInvoice(){
 if(CART.length==0){alert("السلة فارغة"); return;}
 let total = CART.reduce((a,b)=>a+b.p*b.q,0);
@@ -397,9 +417,20 @@ win.document.write('</body></html>');
 win.document.close();
 win.print();
 }
-function removeFromCart(name){let item = CART.find(x=>x.n==name);if(item){let drug = DRUGS.find(x=>x.n==name);drug.q += item.q;CART = CART.filter(x=>x.n!=name);updateCart(); loadStore(); loadAdmin(); saveToLocal();}}
+
+function askChatGPT(){
+if(CART.length==0){alert("السلة فارغة");return;}
+let text="عندي هاي الادوية بالصيدلية وخلصت:\n\n";
+CART.forEach(x=>text+=`- ${x.n} ${x.q} حبة\n`);
+text+="\nاريد بدائل متوفرة لها بنفس التركيبة والجرعة تقريبا. اعطيني 3 بدائل لكل دواء";
+let url="https://chat.openai.com/?q="+encodeURIComponent(text);
+window.open(url,"_blank");
+}
+
+document.addEventListener('DOMContentLoaded', function() {
 loadFromLocal();
-function askChatGPT(){if(CART.length==0){alert("السلة فارغة");return;}let text="عندي هاي الادوية بالصيدلية وخلصت:\n\n";CART.forEach(x=>text+=`- ${x.n} ${x.q} حبة\n`);text+="\nاريد بدائل متوفرة لها بنفس التركيبة والجرعة تقريبا. اعطيني 3 بدائل لكل دواء";let url="https://chat.openai.com/?q="+encodeURIComponent(text);window.open(url,"_blank");}
+loadCart();
+});
 </script>
 </body>
 </html>
