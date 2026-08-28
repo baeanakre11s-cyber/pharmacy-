@@ -7,7 +7,6 @@
 <meta name="theme-color" content="#2563eb">
 <link rel="apple-touch-icon" href="pharmacy-icon-192.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:tahoma;background:#f5f5f5;font-size:16px;min-height:100vh}
@@ -65,9 +64,7 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 .btn-cart-del{background:#f44336;color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;flex-shrink:0}
 .btn-chatgpt{background:#10a37f;color:white;border:none;padding:15px;width:100%;border-radius:12px;cursor:pointer;margin-top:10px;font-size:16px;font-weight:bold}
 .whatsapp{position:fixed;bottom:20px;left:20px;background:#25D366;color:white;padding:15px 20px;border-radius:50px;text-decoration:none;font-weight:bold;z-index:1000}
-@media (max-width:768px){
-.products{grid-template-columns:repeat(2,1fr)}
-}
+@media (max-width:768px){.products{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -108,6 +105,7 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 <div class="stats">
 <div class="stat-card">📦 عدد الادوية: <span id="drugCount">0</span></div>
 <div class="stat-card">💰 قيمة المخزون: <span id="stockVal">0</span> د</div>
+<div class="stat-card">📊 مبيعات اليوم: <span id="todaySales">0</span> د</div>
 </div>
 <div class="form-box">
 <input id="dName" placeholder="اسم الدواء">
@@ -119,12 +117,13 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 <div class="form-buttons">
 <button class="btn-blue" onclick="addDrug()">اضافة دواء</button>
 <button class="btn-green" onclick="add10()">اضافة 10 تجريبي</button>
-<button class="btn-purple" onclick="document.getElementById('fileInput').click()">📥 استيراد Excel</button>
+<button class="btn-purple" onclick="document.getElementById('fileInput').click()">استيراد Excel 📥</button>
 <input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none" onchange="importExcel(event)">
-<button class="btn-orange" onclick="exportData()">💾 نسخ احتياطي</button>
-<button class="btn-blue" onclick="document.getElementById('restoreInput').click()">🔄 استعادة</button>
+<button class="btn-orange" onclick="exportData()">نسخ احتياطي 💾</button>
+<button class="btn-blue" onclick="document.getElementById('restoreInput').click()">استعادة 🔄</button>
 <input type="file" id="restoreInput" accept=".json" style="display:none" onchange="importData(event)">
-<button class="btn-orange" onclick="window.print()">طباعة</button>
+<button class="btn-orange" onclick="window.print()">طباعة 🖨️</button>
+<button class="btn-purple" onclick="showDailyReport()">📊 التقرير اليومي</button>
 </div>
 </div>
 <input id="searchAdmin" onkeyup="searchAdmin()" placeholder="🔍 ابحث باسم الدواء او الشركة..." style="width:100%;padding:12px;border:2px solid #2e7d32;border-radius:10px;margin-bottom:12px;font-size:16px">
@@ -159,7 +158,6 @@ th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
 <div id="cartItems"></div>
 <h3 style="font-size:18px;margin:15px 0">الاجمالي: <span id="totalPrice">0</span> د</h3>
 <button class="btn-whatsapp" onclick="sendOrderWhatsApp()">📱 اطلب عبر واتساب</button>
-<button class="btn-orange" onclick="printInvoice()" style="margin-top:10px">🖨️ طباعة فاتورة</button>
 <button class="btn-chatgpt" onclick="askChatGPT()">اسأل ChatGPT عن البدائل</button>
 </div>
 <a href="https://wa.me/964" target="_blank" class="whatsapp">💬 فريق الدعم</a>
@@ -170,6 +168,7 @@ let DRUGS = [];
 let CART = [];
 let CURRENT_FILTER = 'all';
 let PHARMACY_DATA = {};
+let SALES_LOG = [];
 const VALID_CODE = "PHARMA2026";
 
 function checkActivation(){
@@ -240,10 +239,12 @@ homePage.classList.remove('hidden');
 }
 let drugs = localStorage.getItem('drugsData');
 if(drugs) DRUGS = JSON.parse(drugs);
+let sales = localStorage.getItem('salesLog');
+if(sales) SALES_LOG = JSON.parse(sales);
 }
 
 function exportData(){
-let data = {drugs: DRUGS, pharmacy: PHARMACY_DATA};
+let data = {drugs: DRUGS, pharmacy: PHARMACY_DATA, sales: SALES_LOG};
 let blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
 let url = URL.createObjectURL(blob);
 let a = document.createElement('a');
@@ -253,43 +254,14 @@ a.click();
 alert("تم تصدير النسخة الاحتياطية");
 }
 
-function importData(e){
-let file = e.target.files[0];
-let reader = new FileReader();
-reader.onload = function(event){
-let data = JSON.parse(event.target.result);
-DRUGS = data.drugs || [];
-PHARMACY_DATA = data.pharmacy || PHARMACY_DATA;
-localStorage.setItem('drugsData', JSON.stringify(DRUGS));
-localStorage.setItem('pharmacyData', JSON.stringify(PHARMACY_DATA));
-loadFromLocal(); loadAdmin(); loadStore();
-alert("تم استعادة البيانات بنجاح");
-}
-reader.readAsText(file);
-}
-
 function saveToLocal(){
 localStorage.setItem('drugsData', JSON.stringify(DRUGS));
+localStorage.setItem('salesLog', JSON.stringify(SALES_LOG));
 }
 
-function showAdmin(){homePage.classList.add('hidden');adminPage.classList.remove('hidden');loadAdmin();}
+function showAdmin(){homePage.classList.add('hidden');adminPage.classList.remove('hidden');loadAdmin();updateTodaySales();}
 function showStore(){homePage.classList.add('hidden');storePage.classList.remove('hidden');loadStore();}
 function backHome(){adminPage.classList.add('hidden');storePage.classList.add('hidden');homePage.classList.remove('hidden');}
-
-function importExcel(e){
-let file = e.target.files[0];
-if(!file) return;
-let reader = new FileReader();
-reader.onload = function(event){
-let data = new Uint8Array(event.target.result);
-let workbook = XLSX.read(data, {type:'array'});
-let sheet = workbook.Sheets[workbook.SheetNames[0]];
-let json = XLSX.utils.sheet_to_json(sheet);
-DRUGS = json.map(x=>({n:x["اسم الدواء"]||"",c:x["الشركة"]||"",cat:x["الفئة"]||"مسكنات",b:+x["سعر الشراء"]||0,s:+x["سعر البيع"]||0,q:+x["الكمية"]||0,desc:x["الوصف"]||""}));
-saveToLocal(); loadAdmin(); loadStore(); alert("تم استيراد "+DRUGS.length+" دواء بنجاح");
-}
-reader.readAsArrayBuffer(file);
-}
 
 function add10(){
 DRUGS = [
@@ -318,12 +290,21 @@ function loadAdmin(){
 adminTable.innerHTML=""; let stock=0;
 DRUGS.forEach((x,i)=>{
 stock+=x.b*x.q;
-adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td>${x.q}</td><td><button class="btn-del" onclick="delDrug(${i})">حذف</button></td></tr>`
+adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td><input type="number" value="${x.q}" style="width:70px" onchange="editQty(${i},this.value)"></td><td><button class="btn-del" onclick="delDrug(${i})">حذف</button></td></tr>`
 });
 drugCount.innerText=DRUGS.length; stockVal.innerText=stock.toLocaleString();
 }
 
 function delDrug(i){DRUGS.splice(i,1); saveToLocal(); loadAdmin(); loadStore();}
+
+function editQty(i, newQty){
+newQty = parseInt(newQty);
+if(newQty < 0) newQty = 0;
+DRUGS[i].q = newQty;
+saveToLocal();
+loadAdmin();
+loadStore();
+}
 
 function searchAdmin(){
 let val = document.getElementById('searchAdmin').value.toLowerCase();
@@ -331,7 +312,7 @@ let filtered = DRUGS.filter(x => x.n.toLowerCase().includes(val) || x.c.toLowerC
 adminTable.innerHTML=""; let stock=0;
 filtered.forEach((x,i)=>{
 stock+=x.b*x.q;
-adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td>${x.q}</td><td><button class="btn-del" onclick="delDrug(${DRUGS.indexOf(x)})">حذف</button></td></tr>`;
+adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td><input type="number" value="${x.q}" style="width:70px" onchange="editQty(${DRUGS.indexOf(x)},this.value)"></td><td><button class="btn-del" onclick="delDrug(${DRUGS.indexOf(x)})">حذف</button></td></tr>`;
 });
 }
 
@@ -398,24 +379,30 @@ updateCart();
 
 function sendOrderWhatsApp(){
 if(CART.length==0){alert("السلة فارغة"); return;}
+let orderTotal = CART.reduce((a,b)=>a+b.p*b.q,0);
+let orderProfit = 0;
+let orderItems = [];
+CART.forEach(x => {
+let drug = DRUGS.find(d=>d.n==x.n);
+let profit = (x.p - drug.b) * x.q;
+orderProfit += profit;
+orderItems.push({name:x.n, qty:x.q, price:x.p, profit:profit});
+});
+
+SALES_LOG.push({
+date: new Date().toLocaleDateString('ar-IQ'),
+time: new Date().toLocaleTimeString('ar-IQ'),
+items: orderItems,
+total: orderTotal,
+profit: orderProfit
+});
+
 let msg = `مرحبا اريد اطلب من ${PHARMACY_DATA.name}:\n\n`;
 CART.forEach(x => {msg += `${x.n} x ${x.q} = ${(x.p*x.q).toLocaleString()} د.ع\n`;});
-msg += `\nالمجموع الكلي: ${CART.reduce((a,b)=>a+b.p*b.q,0).toLocaleString()} د.ع`;
+msg += `\nالمجموع الكلي: ${orderTotal.toLocaleString()} د.ع`;
+CART = [];
+updateCart(); saveToLocal(); loadStore(); loadAdmin(); updateTodaySales();
 window.open(`https://wa.me/9647502458975?text=${encodeURIComponent(msg)}`);
-}
-
-function printInvoice(){
-if(CART.length==0){alert("السلة فارغة"); return;}
-let total = CART.reduce((a,b)=>a+b.p*b.q,0);
-let invoice = `<h2 style="text-align:center">💎 فاتورة ${PHARMACY_DATA.name}</h2><p style="text-align:center">التاريخ: ${new Date().toLocaleDateString('ar-IQ')}</p><hr><table style="width:100%;border-collapse:collapse"><thead><tr><th style="border:1px solid #000;padding:8px">الصنف</th><th style="border:1px solid #000;padding:8px">الكمية</th><th style="border:1px solid #000;padding:8px">السعر</th><th style="border:1px solid #000;padding:8px">المجموع</th></tr></thead><tbody>`;
-CART.forEach(x=>{invoice += `<tr><td style="border:1px solid #000;padding:8px">${x.n}</td><td style="border:1px solid #000;padding:8px">${x.q}</td><td style="border:1px solid #000;padding:8px">${x.p} د</td><td style="border:1px solid #000;padding:8px">${(x.p*x.q)} د</td></tr>`});
-invoice += `</tbody></table><h3 style="text-align:left;margin-top:15px">المجموع الكلي: ${total.toLocaleString()} دينار</h3><p style="text-align:center;margin-top:20px">شكرا لتسوقكم معنا 🌹</p>`;
-let win = window.open('', '', 'height=700,width=800');
-win.document.write('<html><head><title>فاتورة</title><meta charset="UTF-8"></head><body style="font-family:tahoma;padding:20px">');
-win.document.write(invoice);
-win.document.write('</body></html>');
-win.document.close();
-win.print();
 }
 
 function askChatGPT(){
@@ -425,6 +412,33 @@ CART.forEach(x=>text+=`- ${x.n} ${x.q} حبة\n`);
 text+="\nاريد بدائل متوفرة لها بنفس التركيبة والجرعة تقريبا. اعطيني 3 بدائل لكل دواء";
 let url="https://chat.openai.com/?q="+encodeURIComponent(text);
 window.open(url,"_blank");
+}
+
+function updateTodaySales(){
+let today = new Date().toLocaleDateString('ar-IQ');
+let todaySales = SALES_LOG.filter(s=>s.date==today).reduce((a,b)=>a+b.total,0);
+document.getElementById('todaySales').innerText = todaySales.toLocaleString();
+}
+
+function showDailyReport(){
+let today = new Date().toLocaleDateString('ar-IQ');
+let todaySales = SALES_LOG.filter(s=>s.date==today);
+let totalSales = todaySales.reduce((a,b)=>a+b.total,0);
+let totalProfit = todaySales.reduce((a,b)=>a+b.profit,0);
+let report = `📊 التقرير اليومي - ${today}\n\n`;
+report += `عدد الفواتير: ${todaySales.length}\n`;
+report += `اجمالي المبيعات: ${totalSales.toLocaleString()} د.ع\n`;
+report += `اجمالي الربح: ${totalProfit.toLocaleString()} د.ع\n`;
+report += `التفاصيل:\n`;
+todaySales.forEach((s,i)=>{
+report += `\nالفاتورة ${i+1} - ${s.time}\n`;
+s.items.forEach(it=>{
+report += `- ${it.name} x ${it.qty} = ${(it.price*it.qty).toLocaleString()} د.ع\n`;
+});
+report += `المجموع: ${s.total.toLocaleString()} د.ع | الربح: ${s.profit.toLocaleString()} د.ع\n`;
+});
+if(todaySales.length==0) report += "لا توجد مبيعات اليوم";
+alert(report);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
