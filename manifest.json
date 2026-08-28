@@ -1,11 +1,13 @@
 {
-  "name": "Pharmacy",
-  "short_name": "Pharmacy",
-  "description": "Pharmacy App",
+  "name": "نظام صيدلية نور - الموظف",
+  "short_name": "صيدلية نور",
+  "description": "تطبيق ادارة صيدلية نور للموظفين",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
+  "lang": "ar",
+  "dir": "rtl",
   "icons": [
     {
       "src": "pharmacy-icon-192.png",
