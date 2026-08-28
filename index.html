@@ -2,449 +2,353 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>نظام الصيدلية</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2563eb">
 <link rel="apple-touch-icon" href="pharmacy-icon-192.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2563eb">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:tahoma;background:#f5f5f5;font-size:16px;min-height:100vh}
-.hidden{display:none!important}
-.login{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px}
-.login-box{background:white;padding:40px 30px;border-radius:20px;width:100%;max-width:500px;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
-.login-box h2{text-align:center;margin-bottom:20px;color:#667eea;font-size:22px}
-.login-box input{width:100%;padding:14px;margin:10px 0;border:2px solid #ddd;border-radius:10px;font-size:16px}
-.login-box button{width:100%;padding:16px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;border-radius:10px;font-size:18px;font-weight:bold;cursor:pointer;margin-top:10px}
-.activation{background:#ffebee;border:3px solid #f44336;padding:30px 20px;border-radius:20px;text-align:center}
-.activation h2{color:#f44336;margin-bottom:12px;font-size:20px}
-.activation p{margin-bottom:12px;font-size:16px}
-.pharmacy-name{font-size:13px;color:#666;margin-top:6px;text-align:center}
-.home{text-align:center;padding:100px 15px 20px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;color:white;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.home h1{font-size:32px;margin-bottom:10px}
-.home p{font-size:16px;margin-bottom:40px;opacity:0.9}
-.btn-main{padding:22px 40px;margin:12px;width:85%;max-width:350px;font-size:20px;border:none;border-radius:18px;cursor:pointer;font-weight:bold;color:white;box-shadow:0 8px 20px rgba(0,0,0,0.2);display:block}
-.btn-admin{background:linear-gradient(135deg,#2e7d32,#1b5e20)}
-.btn-store{background:linear-gradient(135deg,#1976d2,#0d47a1)}
-.btn-red{background:#f44336;color:white;border:none;padding:14px 40px;border-radius:12px;cursor:pointer;font-size:16px;margin-top:15px;width:85%;max-width:350px}
-.admin-panel{padding:15px;background:#fff;min-height:100vh}
-.admin-header{background:linear-gradient(135deg,#2e7d32,#1b5e20);color:white;padding:15px;text-align:center;font-size:24px;font-weight:bold;border-radius:12px;margin-bottom:15px}
-.stats{display:flex;gap:12px;justify-content:center;margin:15px 0;flex-wrap:wrap}
-.stat-card{background:#e8f5e9;padding:15px 25px;border-radius:12px;text-align:center;font-weight:bold;color:#2e7d32;font-size:16px}
-.form-box{background:#f0f4ff;padding:15px;border-radius:12px;margin:15px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.form-box input,.form-box select{padding:10px;border-radius:8px;border:1px solid #ccc;font-size:15px;flex:1;min-width:140px}
-.form-buttons{width:100%;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.btn-blue{background:#1976d2;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:14px;flex:1;min-width:120px}
-.btn-green{background:#2e7d32;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:14px;flex:1;min-width:120px}
-.btn-orange{background:#ff9800;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:14px;flex:1;min-width:120px}
-.btn-purple{background:#9c27b0;color:white;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:14px;flex:1;min-width:120px}
-.table-wrapper{overflow-x:auto;margin-top:15px;border-radius:10px}
-table{width:100%;border-collapse:collapse;background:white;font-size:14px;min-width:700px}
-thead{background:#2e7d32;color:white}
-th,td{padding:10px;text-align:center;border:1px solid #ddd;white-space:nowrap}
-.btn-del{background:#f44336;color:white;border:none;padding:6px 12px;border-radius:5px;cursor:pointer;font-size:13px}
-.store-header{background:linear-gradient(135deg,#2563eb,#1e40af);color:white;padding:12px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.store-banner{background:linear-gradient(135deg,#2563eb,#1e40af);color:white;padding:25px;text-align:center;font-size:20px;font-weight:bold}
-.search-box{padding:12px 15px;background:white}
-.search-box input{width:100%;padding:12px;border:2px solid #2563eb;border-radius:10px;font-size:16px}
-.categories{display:flex;gap:10px;padding:12px 15px;justify-content:flex-start;background:white;overflow-x:auto}
-.cat-btn{padding:8px 16px;background:#e2e8f0;border:none;border-radius:20px;cursor:pointer;font-weight:bold;font-size:15px;flex-shrink:0}
-.cat-btn.active{background:#2563eb;color:white}
-.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:15px;padding:15px;background:white}
-.product-card{background:#2563eb;border-radius:15px;padding:15px;text-align:center;color:white;box-shadow:0 4px 10px rgba(0,0,0,0.1)}
-.product-icon{font-size:60px;margin-bottom:8px;background:white;border-radius:10px;padding:15px;width:100px;height:100px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
-.product-desc{font-size:12px;margin:6px 0;height:36px;overflow:hidden;color:#e0e0e0}
-.product-name{font-weight:bold;font-size:16px;margin:6px 0}
-.product-price{font-size:18px;font-weight:bold;margin:8px 0}
-.btn-add{background:#2ecc71;color:white;border:none;padding:12px;width:100%;border-radius:8px;cursor:pointer;font-weight:bold;font-size:16px}
-.cart-side{position:fixed;right:-400px;top:0;width:100%;max-width:400px;height:100%;background:white;padding:20px;transition:0.3s;box-shadow:-5px 0 20px rgba(0,0,0,0.2);z-index:999;overflow-y:auto}
-.cart-side.open{right:0}
-.btn-whatsapp{background:#25D366;color:white;border:none;padding:15px;width:100%;border-radius:10px;font-size:18px;font-weight:bold;cursor:pointer;margin-top:15px}
-.cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #eee;font-size:16px;gap:10px}
-.btn-cart-del{background:#f44336;color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;flex-shrink:0}
-.btn-chatgpt{background:#10a37f;color:white;border:none;padding:15px;width:100%;border-radius:12px;cursor:pointer;margin-top:10px;font-size:16px;font-weight:bold}
-.whatsapp{position:fixed;bottom:20px;left:20px;background:#25D366;color:white;padding:15px 20px;border-radius:50px;text-decoration:none;font-weight:bold;z-index:1000}
-@media (max-width:768px){.products{grid-template-columns:repeat(2,1fr)}}
+  *{margin:0;padding:0;box-sizing:border-box;font-family: 'Tahoma', sans-serif;}
+  body{background:#f5f5f5;padding-bottom:70px;}
+.header{background:#2E7D32;color:#fff;padding:15px;text-align:center;font-size:18px;font-weight:bold;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+.lang-btns{position:absolute;top:10px;right:10px;}
+  [dir="ltr"].lang-btns{right:auto; left:10px;}
+.lang-btns button{background:white;color:#2E7D32;border:none;padding:5px 10px;border-radius:5px;margin:0 3px;cursor:pointer;font-weight:bold;font-size:12px;}
+.lang-btns button.active{background:#FFC107;color:#000;}
+.search-box{display:flex;gap:8px;padding:10px;background:#fff;position:sticky;top:0;z-index:10;box-shadow:0 2px 4px rgba(0,0,0,0.05);}
+.search-box input{flex:1;padding:12px 15px;border:1px solid #ddd;border-radius:20px;font-size:14px;background:#f9f9f9;}
+.doctor-btn{background:#2E7D32;color:white;border:none;padding:12px 16px;border-radius:20px;font-weight:bold;white-space:nowrap;cursor:pointer;font-size:14px;flex-shrink:0;}
+.doctor-btn:hover{background:#1B5E20;}
+.categories-section{padding:15px 12px;background:#fff;margin-bottom:8px;}
+.categories-title{font-size:16px;font-weight:bold;margin-bottom:12px;color:#333;text-align:right;}
+  [dir="ltr"].categories-title{text-align:left;}
+.categories-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.category-item{background:#E8F5E9;padding:15px;border-radius:12px;text-align:center;font-weight:bold;font-size:14px;cursor:pointer;transition:0.2s;border:2px solid #2E7D32;color:#2E7D32;}
+.category-item:hover{background:#2E7D32;color:white;}
+.category-item.active{background:#2E7D32;color:white;}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px;}
+.product{background:#fff;border-radius:12px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);position:relative;display:flex;flex-direction:column;transition: transform 0.2s;}
+.product:hover{transform: translateY(-3px);}
+.product img{width:100%;height:200px;object-fit: contain;border-radius:8px;margin-bottom:8px;background:#ffffff;padding:8px;border: 1px solid #f0f0f0;}
+.product-actions{display:flex;gap:8px;margin-top:10px;}
+.heart{background:#fff;border:2px solid #2E7D32;border-radius:8px;width:45px;height:45px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#999;cursor:pointer;transition: all 0.2s;flex-shrink:0;}
+.heart.active{color:#f44336;border-color:#f44336;background:#ffebee;}
+.chat-product-btn{background:#25D366;color:#fff;border:none;border-radius:8px;width:45px;height:45px;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;flex-shrink:0;}
+.add-btn{flex:1;background:#2E7D32;color:#fff;border:none;padding:11px;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;}
+.add-btn:hover{background:#1B5E20;}
+.product-info{text-align:right;}
+  [dir="ltr"].product-info{text-align:left;}
+.product-info h3{font-size:14px;margin-bottom:5px;color:#333;height:38px;overflow:hidden;line-height:1.4;font-weight:bold;}
+.product-description{font-size:13px;color:#666;margin-bottom:8px;line-height:1.5;height:35px;overflow:hidden;} /* هذا الجديد مال الوصف */
+.price{color:#2E7D32;font-weight:bold;font-size:17px;margin-bottom:5px;}
+.stock{font-size:12px;color:#666;margin-bottom:10px;}
+.no-result{text-align:center;padding:50px 20px;color:#999;font-size:16px;font-weight:bold;grid-column:1/3;display:none;}
+.cart-page{display:none;padding:15px;}
+.cart-title{text-align:center;font-size:18px;font-weight:bold;margin-bottom:15px;color:#2E7D32;}
+.cart-item{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:12px;border-radius:10px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,0.05);}
+.delete-btn{background:#f44336;color:#fff;border:none;padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;}
+.total{text-align:left;font-size:18px;font-weight:bold;margin:15px 0;color:#2E7D32;}
+  [dir="rtl"].total{text-align:right;}
+.order-btn{background:#25D366;color:#fff;border:none;width:100%;padding:15px;border-radius:10px;font-size:16px;font-weight:bold;margin-bottom:10px;cursor:pointer;}
+.empty-cart{text-align:center;color:#999;padding:50px 0;font-size:16px;}
+.profile-page{display:none;padding:20px;text-align:center;}
+.profile-logo{font-size:60px;margin-bottom:15px;}
+.profile-name{font-size:22px;font-weight:bold;color:#2E7D32;margin-bottom:10px;}
+.profile-info{background:#fff;padding:15px;border-radius:12px;margin-bottom:12px;text-align:right;}
+  [dir="ltr"].profile-info{text-align:left;}
+.profile-info p{margin-bottom:8px;font-size:14px;color:#333;}
+.footer{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px 0;border-top:2px solid #2E7D32;box-shadow:0 -2px 5px rgba(0,0,0,0.05);}
+.footer-item{text-align:center;font-size:11px;color:#888;text-decoration:none;cursor:pointer;position:relative;transition:0.2s;}
+.footer-item.active{color:#2E7D32;font-weight:bold;}
+.footer-item.active span{transform: scale(1.1);}
+.footer-item span{font-size:22px;display:block;transition:0.2s;}
+.cart-count{background:#f44336;color:#fff;border-radius:50%;font-size:10px;padding:2px 5px;position:absolute;top:0;right:5px;}
+  [dir="ltr"].cart-count{right:auto; left:5px;}
 </style>
 </head>
 <body>
 
-<div id="activationPage" class="login hidden">
-<div class="login-box activation">
-<h2>🔒 انتهت الفترة التجريبية</h2>
-<p>مر 3 ايام على استخدام النظام</p>
-<p>للاستمرار يرجى ادخال كود التفعيل</p>
-<input id="activationCode" placeholder="ادخل كود التفعيل هنا">
-<button onclick="checkActivation()">تفعيل النظام</button>
-<p style="font-size:13px;color:#666">للحصول على الكود تواصلي مع الدعم: 0750xxxxxxx</p>
-</div>
+<div class="header" id="headerTitle">
+  نصائح صحية اليوم
+  <div class="lang-btns">
+    <button onclick="changeLang('ar')" id="btn-ar">AR</button>
+    <button onclick="changeLang('ku')" id="btn-ku">KU</button>
+    <button onclick="changeLang('en')" id="btn-en">EN</button>
+  </div>
 </div>
 
-<div id="loginPage" class="login">
-<div class="login-box">
-<h2>🔐 تسجيل دخول الصيدلية</h2>
-<input id="pharmacyName" placeholder="اسم الصيدلية">
-<input id="userName" placeholder="اسم المستخدم">
-<input id="userPass" type="password" placeholder="كلمة السر">
-<button onclick="login()">دخول / انشاء حساب</button>
-<p class="pharmacy-name">اول مرة؟ اكتبي البيانات وراح ينحفظ الحساب</p>
-</div>
+<div class="search-box" id="searchBox">
+  <input type="text" id="searchInput" placeholder="ابحث عن دواء..." oninput="searchProducts()">
+  <button onclick="openChat()" class="doctor-btn" id="askBtn">اسأل 💬</button>
 </div>
 
-<div id="homePage" class="home hidden">
-<h1>💎 <span id="pharmacyTitle">نظام الصيدلية</span></h1>
-<p id="welcomeMsg">مرحبا بك</p>
-<button class="btn-main btn-admin" onclick="showAdmin()">🔐 دخول الموظفين</button>
-<button class="btn-main btn-store" onclick="showStore()">🛒 متجر الزبائن</button>
-<button class="btn-red" onclick="logout()">تسجيل خروج</button>
+<div class="categories-section" id="categoriesSection">
+  <div class="categories-title" id="catTitle">الفئات</div>
+  <div class="categories-grid">
+    <div class="category-item" id="cat-مسكنات" onclick="filterByCategory('مسكنات')">💊 <span data-key="painkillers">مسكنات</span></div>
+    <div class="category-item" id="cat-فيتامينات" onclick="filterByCategory('فيتامينات')">🍊 <span data-key="vitamins">فيتامينات</span></div>
+    <div class="category-item" id="cat-اطفال" onclick="filterByCategory('اطفال')">👶 <span data-key="kids">عناية الاطفال</span></div>
+    <div class="category-item" id="cat-عناية" onclick="filterByCategory('عناية')">✨ <span data-key="care">عناية شخصية</span></div>
+  </div>
 </div>
 
-<div id="adminPage" class="admin-panel hidden">
-<div class="admin-header">📦 لوحة تحكم <span id="adminPharmacyName"></span></div>
-<button style="background:#999;color:white;padding:8px 16px;border:none;border-radius:8px;font-size:15px;margin-bottom:10px" onclick="backHome()">الرجوع للرئيسية</button>
-<div class="stats">
-<div class="stat-card">📦 عدد الادوية: <span id="drugCount">0</span></div>
-<div class="stat-card">💰 قيمة المخزون: <span id="stockVal">0</span> د</div>
-<div class="stat-card">📊 مبيعات اليوم: <span id="todaySales">0</span> د</div>
-</div>
-<div class="form-box">
-<input id="dName" placeholder="اسم الدواء">
-<input id="dCompany" placeholder="الشركة">
-<select id="dCat"><option>مسكنات</option><option>مضاد حيوي</option><option>معدة</option><option>فيتامينات</option></select>
-<input id="dBuy" type="number" placeholder="سعر الشراء">
-<input id="dSell" type="number" placeholder="سعر البيع">
-<input id="dQty" type="number" placeholder="الكمية">
-<div class="form-buttons">
-<button class="btn-blue" onclick="addDrug()">اضافة دواء</button>
-<button class="btn-green" onclick="add10()">اضافة 10 تجريبي</button>
-<button class="btn-purple" onclick="document.getElementById('fileInput').click()">استيراد Excel 📥</button>
-<input type="file" id="fileInput" accept=".xlsx,.xls" style="display:none" onchange="importExcel(event)">
-<button class="btn-orange" onclick="exportData()">نسخ احتياطي 💾</button>
-<button class="btn-blue" onclick="document.getElementById('restoreInput').click()">استعادة 🔄</button>
-<input type="file" id="restoreInput" accept=".json" style="display:none" onchange="importData(event)">
-<button class="btn-orange" onclick="window.print()">طباعة 🖨️</button>
-<button class="btn-purple" onclick="showDailyReport()">📊 التقرير اليومي</button>
-</div>
-</div>
-<input id="searchAdmin" onkeyup="searchAdmin()" placeholder="🔍 ابحث باسم الدواء او الشركة..." style="width:100%;padding:12px;border:2px solid #2e7d32;border-radius:10px;margin-bottom:12px;font-size:16px">
-<div class="table-wrapper">
-<table>
-<thead><tr><th>#</th><th>الاسم</th><th>الشركة</th><th>الفئة</th><th>شراء</th><th>بيع</th><th>كمية</th><th>حذف</th></tr></thead>
-<tbody id="adminTable"></tbody>
-</table>
-</div>
+<div class="products" id="products">
+  <div id="loadingMsg" style="text-align:center;padding:30px;color:#999;grid-column:1/3;">جاري تحميل المنتجات...</div>
+  <div class="no-result" id="noResult">ما لقينا النتيجة 😔</div>
 </div>
 
-<div id="storePage" class="hidden">
-<div class="store-header">
-<button style="background:#475569;color:white;border:none;padding:8px 16px;border-radius:20px;font-size:15px" onclick="backHome()">رجوع</button>
-<div style="font-size:20px;font-weight:bold">💎 <span id="storePharmacyName">صيدليتنا</span></div>
-<button style="background:white;color:#2563eb;padding:8px 16px;border-radius:20px;border:none;font-size:15px" onclick="document.getElementById('cartSide').classList.toggle('open')">السلة (<span id="cartCount">0</span>) 🛒</button>
+<div class="cart-page" id="cartPage">
+  <h2 class="cart-title" id="cartPageTitle">سلة المشتريات 🛒</h2>
+  <div id="cartItems"></div>
+  <div class="total" id="cartTotal">الاجمالي: 0 د</div>
+  <button class="order-btn" id="orderBtn" onclick="orderWhatsApp()">اطلب عبر واتساب 📱</button>
 </div>
-<div class="store-banner">مرحبا بك في <span id="storeBannerName">صيدليتنا</span> الالكترونية</div>
-<div class="search-box">
-<input id="searchStore" onkeyup="searchStore()" placeholder="🔍 ابحث عن دواء...">
+
+<div class="profile-page" id="profilePage">
+  <div class="profile-logo">🏥</div>
+  <div class="profile-name" id="profileName">نظام الصيدلية</div>
+  <div class="profile-info">
+    <p>📱 <b id="whatsLabel">الواتساب:</b> 07502458975</p>
+    <p>📍 <b id="addrLabel">العنوان:</b> <span id="address">زاخو - شارع السوق</span></p>
+    <p>⏰ <b id="timeLabel">ساعات الدوام:</b> <span id="worktime">8 صباحاً - 12 ليلاً</span></p>
+    <p>🚚 <b id="deliveryLabel">التوصيل:</b> <span id="delivery">داخل زاخو مجاني</span></p>
+  </div>
 </div>
-<div class="categories">
-<button class="cat-btn active" onclick="filterCat('all',this)">الكل</button>
-<button class="cat-btn" onclick="filterCat('مسكنات',this)">مسكنات</button>
-<button class="cat-btn" onclick="filterCat('مضاد حيوي',this)">مضاد حيوي</button>
-<button class="cat-btn" onclick="filterCat('فيتامينات',this)">فيتامينات</button>
-<button class="cat-btn" onclick="filterCat('معدة',this)">معدة</button>
+
+<div class="footer">
+  <a class="footer-item active" onclick="showHome()"><span>🏠</span><br><span id="nav-home">الرئيسية</span></a>
+  <a class="footer-item" onclick="showCategories()"><span>📂</span><br><span id="nav-cat">الفئات</span></a>
+  <a class="footer-item" onclick="showFavorites()"><span>❤️</span><br><span id="nav-fav">المفضلة</span></a>
+  <a class="footer-item" onclick="showCart()"><span>🛍️</span><br><span id="nav-cart">السلة</span> <span class="cart-count" id="cartCount" style="display:none;">0</span></a>
+  <a class="footer-item" onclick="showProfile()"><span>🧑</span><br><span id="nav-profile">صفحتي</span></a>
 </div>
-<div class="products" id="productsGrid"></div>
-<div class="cart-side" id="cartSide">
-<h3 style="font-size:20px;margin-bottom:15px">سلة المشتريات</h3>
-<div id="cartItems"></div>
-<h3 style="font-size:18px;margin:15px 0">الاجمالي: <span id="totalPrice">0</span> د</h3>
-<button class="btn-whatsapp" onclick="sendOrderWhatsApp()">📱 اطلب عبر واتساب</button>
-<button class="btn-chatgpt" onclick="askChatGPT()">اسأل ChatGPT عن البدائل</button>
-</div>
-<a href="https://wa.me/964" target="_blank" class="whatsapp">💬 فريق الدعم</a>
-</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
 <script>
-let DRUGS = [];
-let CART = [];
-let CURRENT_FILTER = 'all';
-let PHARMACY_DATA = {};
-let SALES_LOG = [];
-const VALID_CODE = "PHARMA2026";
+const firebaseConfig = {
+  apiKey: "AIzaSyBlz1KrWEYEFc0XlCwnQks5M6jynobC3Q",
+  authDomain: "pharmacy-app-8e0d8.firebaseapp.com",
+  projectId: "pharmacy-app-8e0d8",
+  storageBucket: "pharmacy-app-8e0d8.appspot.com",
+  messagingSenderId: "1096962693323",
+  appId: "1:1096962693323:web:cd00fe04f83b50c173234e"
+};
 
-function checkActivation(){
-let code = activationCode.value.trim();
-if(code === VALID_CODE){
-localStorage.setItem('activated', 'true');
-location.reload();
-} else {
-alert("كود التفعيل غير صحيح");
-}
-}
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-function checkTrial(){
-let activated = localStorage.getItem('activated');
-if(activated === 'true') return true;
-let installDate = localStorage.getItem('installDate');
-if(!installDate){
-installDate = new Date().getTime();
-localStorage.setItem('installDate', installDate);
-}
-let daysPassed = (new Date().getTime() - installDate) / (1000*60*60*24);
-if(daysPassed > 3){
-loginPage.classList.add('hidden');
-homePage.classList.add('hidden');
-activationPage.classList.remove('hidden');
-return false;
-}
-return true;
-}
+let cart = [];
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+let allProducts = [];
+let selectedCategory = null;
+let currentLang = localStorage.getItem('lang') || 'ar';
 
-function login(){
-let name = pharmacyName.value.trim();
-let user = userName.value.trim();
-let pass = userPass.value.trim();
-if(!name ||!user ||!pass){alert("املي كل الحقول"); return;}
-PHARMACY_DATA = {name, user, pass};
-localStorage.setItem('pharmacyData', JSON.stringify(PHARMACY_DATA));
-pharmacyTitle.innerText = name;
-adminPharmacyName.innerText = name;
-storePharmacyName.innerText = name;
-storeBannerName.innerText = name;
-welcomeMsg.innerText = `مرحبا بك في ${name}`;
-if(checkTrial()){
-loginPage.classList.add('hidden');
-homePage.classList.remove('hidden');
-}
-loadFromLocal();
-}
+const translations = {
+  ar: {dir:"rtl", title:"نصائح صحية اليوم", search:"ابحث عن دواء...", askDoctor:"اسأل 💬", categories:"الفئات", home:"الرئيسية", favorites:"المفضلة", cart:"السلة", profile:"صفحتي", addToCart:"اضافة للسلة", stock:"المخزون:", total:"الاجمالي:", order:"اطلب عبر واتساب 📱", loading:"جاري تحميل المنتجات...", noResult:"ما لقينا النتيجة 😔", emptyCart:"السلة فارغة", painkillers:"مسكنات", vitamins:"فيتامينات", kids:"عناية الاطفال", care:"عناية شخصية", whatsapp:"الواتساب:", address:"العنوان:", worktime:"ساعات الدوام:", delivery:"التوصيل:", addrValue:"زاخو - شارع السوق", timeValue:"8 صباحاً - 12 ليلاً", deliveryValue:"داخل زاخو مجاني", cartPageTitle:"سلة المشتريات 🛒"},
+  ku: {dir:"rtl", title:"سەرنجی تەندروستی ئەمڕۆ", search:"گەڕان بۆ دەرمان...", askDoctor:"بپرسە 💬", categories:"پۆلەکان", home:"سەرەکی", favorites:"دڵخوازەکان", cart:"سله", profile:"پەڕەی من", addToCart:"زیادکردن بۆ سلە", stock:"کۆگا:", total:"کۆی گشتی:", order:"داواکردن لە واتساب 📱", loading:"بەرهەمەکان بار دەکرێن...", noResult:"هیچ ئەنجامێک نەدۆزرایەوە 😔", emptyCart:"سله بەتاڵ", painkillers:"ئازارشکێن", vitamins:"ڤیتامین", kids:"خاوێنی منداڵ", care:"خاوێنی کەسی", whatsapp:"واتساب:", address:"ناونیشان:", worktime:"کاتژمێری کار:", delivery:"گەیاندن:", addrValue:"زاخۆ - شەقامی بازاڕ", timeValue:"8 بەیانی - 12 شەو", deliveryValue:"لەناو زاخۆ خۆڕاییە", cartPageTitle:"سله ی کڕین 🛒"},
+  en: {dir:"ltr", title:"Health Tips Today", search:"Search for medicine...", askDoctor:"Ask Doctor 💬", categories:"Categories", home:"Home", favorites:"Favorites", cart:"Cart", profile:"Profile", addToCart:"Add to Cart", stock:"Stock:", total:"Total:", order:"Order via WhatsApp 📱", loading:"Loading products...", noResult:"No results found 😔", emptyCart:"Cart is empty", painkillers:"Painkillers", vitamins:"Vitamins", kids:"Baby Care", care:"Personal Care", whatsapp:"WhatsApp:", address:"Address:", worktime:"Working Hours:", delivery:"Delivery:", addrValue:"Zakho - Market Street", timeValue:"8 AM - 12 PM", deliveryValue:"Free delivery in Zakho", cartPageTitle:"Shopping Cart 🛒"}
+};
 
-function logout(){
-localStorage.clear();
-location.reload();
-}
+function applyTranslations(){
+  let t = translations[currentLang];
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = t.dir;
 
-function loadFromLocal(){
-let saved = localStorage.getItem('pharmacyData');
-if(saved){
-PHARMACY_DATA = JSON.parse(saved);
-pharmacyTitle.innerText = PHARMACY_DATA.name;
-adminPharmacyName.innerText = PHARMACY_DATA.name;
-storePharmacyName.innerText = PHARMACY_DATA.name;
-storeBannerName.innerText = PHARMACY_DATA.name;
-welcomeMsg.innerText = `مرحبا بك في ${PHARMACY_DATA.name}`;
-if(checkTrial()){
-loginPage.classList.add('hidden');
-homePage.classList.remove('hidden');
-}
-}
-let drugs = localStorage.getItem('drugsData');
-if(drugs) DRUGS = JSON.parse(drugs);
-let sales = localStorage.getItem('salesLog');
-if(sales) SALES_LOG = JSON.parse(sales);
+  document.getElementById('headerTitle').childNodes[0].nodeValue = t.title;
+  document.getElementById('searchInput').placeholder = t.search;
+  document.getElementById('askBtn').innerText = t.askDoctor;
+  document.getElementById('catTitle').innerText = t.categories;
+  document.getElementById('loadingMsg').innerText = t.loading;
+  document.getElementById('noResult').innerText = t.noResult;
+  document.getElementById('cartPageTitle').innerText = t.cartPageTitle;
+  document.getElementById('orderBtn').innerText = t.order;
+  document.getElementById('profileName').innerText = t.title;
+  document.getElementById('whatsLabel').innerText = t.whatsapp;
+  document.getElementById('addrLabel').innerText = t.address;
+  document.getElementById('timeLabel').innerText = t.worktime;
+  document.getElementById('deliveryLabel').innerText = t.delivery;
+  document.getElementById('address').innerText = t.addrValue;
+  document.getElementById('worktime').innerText = t.timeValue;
+  document.getElementById('delivery').innerText = t.deliveryValue;
+
+  document.getElementById('nav-home').innerText = t.home;
+  document.getElementById('nav-cat').innerText = t.categories;
+  document.getElementById('nav-fav').innerText = t.favorites;
+  document.getElementById('nav-cart').innerText = t.cart;
+  document.getElementById('nav-profile').innerText = t.profile;
+
+  document.querySelectorAll('[data-key="painkillers"]').forEach(el=>el.innerText=t.painkillers);
+  document.querySelectorAll('[data-key="vitamins"]').forEach(el=>el.innerText=t.vitamins);
+  document.querySelectorAll('[data-key="kids"]').forEach(el=>el.innerText=t.kids);
+  document.querySelectorAll('[data-key="care"]').forEach(el=>el.innerText=t.care);
+
+  document.querySelectorAll('.lang-btns button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btn-'+currentLang).classList.add('active');
 }
 
-function exportData(){
-let data = {drugs: DRUGS, pharmacy: PHARMACY_DATA, sales: SALES_LOG};
-let blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
-let url = URL.createObjectURL(blob);
-let a = document.createElement('a');
-a.href = url;
-a.download = PHARMACY_DATA.name + '_backup.json';
-a.click();
-alert("تم تصدير النسخة الاحتياطية");
+function changeLang(lang){
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  applyTranslations();
+  applyFilters();
 }
 
-function saveToLocal(){
-localStorage.setItem('drugsData', JSON.stringify(DRUGS));
-localStorage.setItem('salesLog', JSON.stringify(SALES_LOG));
+function loadProducts() {
+ db.collection("products").onSnapshot((snapshot) => {
+    allProducts = [];
+    snapshot.forEach(doc => {
+      let data = doc.data();
+      data.id = String(doc.id);
+      allProducts.push(data);
+    });
+    applyFilters();
+  });
 }
 
-function showAdmin(){homePage.classList.add('hidden');adminPage.classList.remove('hidden');loadAdmin();updateTodaySales();}
-function showStore(){homePage.classList.add('hidden');storePage.classList.remove('hidden');loadStore();}
-function backHome(){adminPage.classList.add('hidden');storePage.classList.add('hidden');homePage.classList.remove('hidden');}
+function applyFilters(){
+  let productsToShow = allProducts;
 
-function add10(){
-DRUGS = [
-{n:"بندول اكسترا",c:"GSK",cat:"مسكنات",b:1200,s:3000,q:20, desc:"مسكن قوي للصداع"},
-{n:"ديكلون 100",c:"Novartis",cat:"مسكنات",b:1500,s:3000,q:15, desc:"مسكن لالام المفاصل"},
-{n:"فولتارين 50",c:"Novartis",cat:"مسكنات",b:1000,s:2500,q:10, desc:"مضاد التهاب"},
-{n:"بروفين 400",c:"Abbott",cat:"مسكنات",b:800,s:2000,q:30, desc:"مسكن وخافض حرارة"},
-{n:"بندول 500",c:"GSK",cat:"مسكنات",b:500,s:1500,q:50, desc:"مسكن للصداع"},
-{n:"اموكسيل 500",c:"GSK",cat:"مضاد حيوي",b:2000,s:5000,q:20, desc:"مضاد حيوي"},
-{n:"فلاجيل 500",c:"Sanofi",cat:"مضاد حيوي",b:1000,s:3000,q:25, desc:"لعلاج الاسهال"},
-{n:"فيتامين C",c:"Bayer",cat:"فيتامينات",b:2000,s:5000,q:40, desc:"مقوي مناعة"},
-{n:"حديد فوليك",c:"Tabuk",cat:"فيتامينات",b:1500,s:4000,q:30, desc:"لعلاج فقر الدم"},
-{n:"شراب كحة",c:"Julphar",cat:"معدة",b:1000,s:3500,q:25, desc:"مهدئ للسعال"}
-];
-saveToLocal(); loadAdmin(); loadStore(); alert("تم اضافة 10 ادوية");
+  if(selectedCategory){
+    productsToShow = productsToShow.filter(p => p.category === selectedCategory);
+  }
+
+  let searchText = document.getElementById('searchInput').value.toLowerCase();
+  if(searchText){
+    productsToShow = productsToShow.filter(p => {
+      let name = p['name_'+currentLang] || p.name || "";
+      return name.toLowerCase().includes(searchText)
+    });
+  }
+  displayProducts(productsToShow);
 }
 
-function addDrug(){
-if(!dName.value ||!dSell.value ||!dQty.value){alert("كملي البيانات");return}
-DRUGS.push({n:dName.value,c:dCompany.value,cat:dCat.value,b:+dBuy.value,s:+dSell.value,q:+dQty.value, desc:""});
-dName.value=dCompany.value=dBuy.value=dSell.value=dQty.value="";
-saveToLocal(); loadAdmin(); loadStore();
+function displayProducts(products) {
+  let productsDiv = document.getElementById('products');
+  document.getElementById('loadingMsg').style.display = 'none';
+  if(products.length === 0) {
+    productsDiv.innerHTML = `<div id="loadingMsg" style="display:none;"></div><div class="no-result" id="noResult" style="display:block;">${translations[currentLang].noResult}</div>`;
+    return;
+  }
+  let html = `<div id="loadingMsg" style="display:none;"></div><div class="no-result" id="noResult">ما لقينا النتيجة 😔</div>`;
+  products.forEach(p => {
+    let isFav = favorites.includes(String(p.id))? 'active' : '';
+    let name = p['name_'+currentLang] || p.name || "";
+    let desc = p['description_'+currentLang] || p.description || ""; // هذا الجديد
+    html += `<div class="product" data-name="${name.toLowerCase()}">
+      <img src="${p.image || 'https://via.placeholder.com/300x300/FFFFFF/2E7D32?text=Pharmacy'}">
+      <div class="product-info">
+      <h3>${p['name_' + currentLang] || p.name}</h3>
+      <p class="product-description">${desc}</p> <!-- وهذا الجديد -->
+        <p class="price">${p.price.toLocaleString()} د</p>
+        <p class="stock">${translations[currentLang].stock} ${p.stock || 0}</p>
+      </div>
+      <div class="product-actions">
+        <button class="heart ${isFav}" onclick="toggleFavorite('${p.id}')">❤️</button>
+        <button class="chat-product-btn" onclick="chatAboutProduct('${name}')">💬</button>
+        <button class="add-btn" onclick="addToCart('${p.id}')">${translations[currentLang].addToCart}</button>
+      </div>
+      </div>`;
+  });
+  productsDiv.innerHTML = html;
 }
 
-function loadAdmin(){
-adminTable.innerHTML=""; let stock=0;
-DRUGS.forEach((x,i)=>{
-stock+=x.b*x.q;
-adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td><input type="number" value="${x.q}" style="width:70px" onchange="editQty(${i},this.value)"></td><td><button class="btn-del" onclick="delDrug(${i})">حذف</button></td></tr>`
-});
-drugCount.innerText=DRUGS.length; stockVal.innerText=stock.toLocaleString();
+function chatAboutProduct(name){
+  let msg = currentLang=='ku'? `سڵاو، دەمەوێت لێکۆڵینەوە لەسەر دەرمان: ${name}` : currentLang=='en'? `Hello, I want to inquire about medicine: ${name}` : `مرحبا، اريد استفسر عن دواء: ${name}`;
+  window.open(`https://wa.me/9647502458975?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
-function delDrug(i){DRUGS.splice(i,1); saveToLocal(); loadAdmin(); loadStore();}
-
-function editQty(i, newQty){
-newQty = parseInt(newQty);
-if(newQty < 0) newQty = 0;
-DRUGS[i].q = newQty;
-saveToLocal();
-loadAdmin();
-loadStore();
+function toggleFavorite(id){
+  id = String(id);
+  if(favorites.includes(id)){
+    favorites = favorites.filter(f => f!= id);
+  } else {
+    favorites.push(id);
+  }
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  applyFilters();
 }
 
-function searchAdmin(){
-let val = document.getElementById('searchAdmin').value.toLowerCase();
-let filtered = DRUGS.filter(x => x.n.toLowerCase().includes(val) || x.c.toLowerCase().includes(val));
-adminTable.innerHTML=""; let stock=0;
-filtered.forEach((x,i)=>{
-stock+=x.b*x.q;
-adminTable.innerHTML+=`<tr><td>${i+1}</td><td>${x.n}</td><td>${x.c}</td><td>${x.cat}</td><td>${x.b}</td><td>${x.s}</td><td><input type="number" value="${x.q}" style="width:70px" onchange="editQty(${DRUGS.indexOf(x)},this.value)"></td><td><button class="btn-del" onclick="delDrug(${DRUGS.indexOf(x)})">حذف</button></td></tr>`;
-});
+function searchProducts(){
+  applyFilters();
 }
 
-function searchStore(){
-let val = document.getElementById('searchStore').value.toLowerCase();
-let f = CURRENT_FILTER==='all'? DRUGS : DRUGS.filter(x=>x.cat===CURRENT_FILTER);
-let filtered = f.filter(x=> x.n.toLowerCase().includes(val) || x.c.toLowerCase().includes(val));
-renderStore(filtered);
+function addToCart(productId){
+  let product = allProducts.find(p => String(p.id) == String(productId));
+  if(!product) return;
+  let name = product['name_'+currentLang] || product.name;
+  let item = cart.find(i => i.id == productId);
+  if(item){ item.qty += 1; } else { cart.push({id: product.id, name: name, price: product.price, qty: 1}); }
+  updateCartCount();
+  alert(name + ' ✅');
 }
 
-function renderStore(list=DRUGS){
-let f = list.filter(x=>x.q>0);
-productsGrid.innerHTML = f.map(x=>`
-<div class="product-card">
-<div class="product-icon">💊</div>
-<div class="product-name">${x.n}</div>
-<div style="font-size:13px">${x.c}</div>
-<div class="product-desc">${x.desc}</div>
-<div class="product-price">${x.s} دينار</div>
-<div>المخزون: ${x.q}</div>
-<button class="btn-add" onclick="addToCart('${x.n}')">+ اضف للسلة</button>
-</div>`).join('');
+function updateCartCount(){
+  let count = cart.reduce((t,i)=>t+i.qty,0);
+  document.getElementById('cartCount').innerText = count;
+  document.getElementById('cartCount').style.display = count > 0? 'inline' : 'none';
 }
 
-function loadStore(){
-renderStore(DRUGS);
+function filterByCategory(cat){
+  if(selectedCategory === cat){
+    selectedCategory = null;
+  } else {
+    selectedCategory = cat;
+  }
+  document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
+  if(selectedCategory){
+    document.getElementById('cat-' + selectedCategory).classList.add('active');
+    document.getElementById('headerTitle').childNodes[0].nodeValue = selectedCategory;
+  } else {
+    document.getElementById('headerTitle').childNodes[0].nodeValue = translations[currentLang].title;
+  }
+  applyFilters();
+  showHome();
 }
 
-function filterCat(cat,btn){
-CURRENT_FILTER = cat;
-document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
-btn.classList.add('active');
-searchStore();
+function showCategories(){ hideAll(); document.getElementById('products').style.display='grid'; document.getElementById('searchBox').style.display='flex'; document.getElementById('categoriesSection').style.display='block'; document.getElementById('headerTitle').childNodes[0].nodeValue=translations[currentLang].categories; setActive(1); }
+
+function showCart(){ hideAll(); document.getElementById('cartPage').style.display='block'; document.getElementById('categoriesSection').style.display='none'; document.getElementById('headerTitle').childNodes[0].nodeValue=translations[currentLang].cart; renderCart(); setActive(3); }
+
+function showFavorites(){
+  hideAll();
+  document.getElementById('products').style.display='grid';
+  document.getElementById('categoriesSection').style.display='none';
+  document.getElementById('headerTitle').childNodes[0].nodeValue=translations[currentLang].favorites + ' ❤️';
+  document.getElementById('searchBox').style.display = 'none';
+  setActive(2);
+  let favProducts = allProducts.filter(p=>favorites.includes(String(p.id)));
+  displayProducts(favProducts);
 }
 
-function addToCart(name){
-let drug = DRUGS.find(x=>x.n==name);
-if(drug.q <= 0){alert("المنتج نفذ"); return;}
-let item = CART.find(x=>x.n==name);
-if(item) item.q++; else CART.push({n:name,p:drug.s,q:1});
-drug.q--;
-updateCart(); loadStore(); loadAdmin(); saveToLocal();
+function showProfile(){ hideAll(); document.getElementById('profilePage').style.display='block'; document.getElementById('categoriesSection').style.display='none'; document.getElementById('headerTitle').childNodes[0].nodeValue=translations[currentLang].profile; setActive(4); }
+
+function showHome(){
+  hideAll();
+  document.getElementById('products').style.display='grid';
+  document.getElementById('searchBox').style.display='flex';
+  document.getElementById('categoriesSection').style.display='none';
+  if(!selectedCategory){
+    document.getElementById('headerTitle').childNodes[0].nodeValue=translations[currentLang].title;
+  }
+  applyFilters();
+  setActive(0);
 }
 
-function updateCart(){
-cartCount.innerText=CART.reduce((a,b)=>a+b.q,0);
-totalPrice.innerText=CART.reduce((a,b)=>a+b.p*b.q,0).toLocaleString();
-cartItems.innerHTML=CART.map(x=>`<div class="cart-item"><span>${x.n} x ${x.q} = ${(x.p*x.q).toLocaleString()} د</span><button class="btn-cart-del" onclick="removeFromCart('${x.n}')">حذف</button></div>`).join("");
+function hideAll(){ document.getElementById('products').style.display='none'; document.getElementById('cartPage').style.display='none'; document.getElementById('profilePage').style.display='none'; document.getElementById('searchBox').style.display='none'; }
+function setActive(n){ document.querySelectorAll('.footer-item').forEach((el,i)=>{ el.classList.remove('active'); if(i==n) el.classList.add('active'); }) }
+function renderCart(){let d=document.getElementById('cartItems');let t=0;let tr=translations[currentLang];if(cart.length==0){d.innerHTML=`<div class="empty-cart">${tr.emptyCart}</div>`;}else{d.innerHTML='';cart.forEach((i,idx)=>{t+=i.price*i.qty;d.innerHTML+=`<div class="cart-item"><div><b>${i.name}</b><br>${i.price.toLocaleString()} د x ${i.qty}</div><button class="delete-btn" onclick="removeItem(${idx})">حذف</button></div>`;});}document.getElementById('cartTotal').innerText=`${tr.total} ${t.toLocaleString()} د`;}
+function removeItem(i){cart.splice(i,1);renderCart();updateCartCount();}
+function orderWhatsApp(){if(cart.length==0){alert(translations[currentLang].emptyCart);return;}let m='مرحبا صيدلية، اريد اطلب:\n\n';cart.forEach(i=>{m+=`${i.name} x ${i.qty} = ${(i.price*i.qty).toLocaleString()} د\n`;});let t=cart.reduce((s,i)=>s+i.price*i.qty,0);m+=`\nالاجمالي: ${t.toLocaleString()} د`;window.open(`https://wa.me/9647502458975?text=${encodeURIComponent(m)}`,'_blank');}
+function openChat(){
+  let msg = currentLang=='ku'? "سڵاو دکتۆر، پرسیارم هەیە سەبارەت بە..." : currentLang=='en'? "Hello Doctor, I have a question about..." : "السلام عليكم دكتور اريد استشارة بخصوص...";
+  window.open(`https://wa.me/9647502458975?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
-function removeFromCart(name){
-let item = CART.find(x=>x.n==name);
-if(item){
-let drug = DRUGS.find(x=>x.n==name);
-drug.q += item.q;
-CART = CART.filter(x=>x.n!=name);
-updateCart(); loadStore(); loadAdmin(); saveToLocal();
-}
-}
-
-function loadCart(){
-updateCart();
-}
-
-function sendOrderWhatsApp(){
-if(CART.length==0){alert("السلة فارغة"); return;}
-let orderTotal = CART.reduce((a,b)=>a+b.p*b.q,0);
-let orderProfit = 0;
-let orderItems = [];
-CART.forEach(x => {
-let drug = DRUGS.find(d=>d.n==x.n);
-let profit = (x.p - drug.b) * x.q;
-orderProfit += profit;
-orderItems.push({name:x.n, qty:x.q, price:x.p, profit:profit});
-});
-
-SALES_LOG.push({
-date: new Date().toLocaleDateString('ar-IQ'),
-time: new Date().toLocaleTimeString('ar-IQ'),
-items: orderItems,
-total: orderTotal,
-profit: orderProfit
-});
-
-let msg = `مرحبا اريد اطلب من ${PHARMACY_DATA.name}:\n\n`;
-CART.forEach(x => {msg += `${x.n} x ${x.q} = ${(x.p*x.q).toLocaleString()} د.ع\n`;});
-msg += `\nالمجموع الكلي: ${orderTotal.toLocaleString()} د.ع`;
-CART = [];
-updateCart(); saveToLocal(); loadStore(); loadAdmin(); updateTodaySales();
-window.open(`https://wa.me/9647502458975?text=${encodeURIComponent(msg)}`);
-}
-
-function askChatGPT(){
-if(CART.length==0){alert("السلة فارغة");return;}
-let text="عندي هاي الادوية بالصيدلية وخلصت:\n\n";
-CART.forEach(x=>text+=`- ${x.n} ${x.q} حبة\n`);
-text+="\nاريد بدائل متوفرة لها بنفس التركيبة والجرعة تقريبا. اعطيني 3 بدائل لكل دواء";
-let url="https://chat.openai.com/?q="+encodeURIComponent(text);
-window.open(url,"_blank");
-}
-
-function updateTodaySales(){
-let today = new Date().toLocaleDateString('ar-IQ');
-let todaySales = SALES_LOG.filter(s=>s.date==today).reduce((a,b)=>a+b.total,0);
-document.getElementById('todaySales').innerText = todaySales.toLocaleString();
-}
-
-function showDailyReport(){
-let today = new Date().toLocaleDateString('ar-IQ');
-let todaySales = SALES_LOG.filter(s=>s.date==today);
-let totalSales = todaySales.reduce((a,b)=>a+b.total,0);
-let totalProfit = todaySales.reduce((a,b)=>a+b.profit,0);
-let report = `📊 التقرير اليومي - ${today}\n\n`;
-report += `عدد الفواتير: ${todaySales.length}\n`;
-report += `اجمالي المبيعات: ${totalSales.toLocaleString()} د.ع\n`;
-report += `اجمالي الربح: ${totalProfit.toLocaleString()} د.ع\n`;
-report += `التفاصيل:\n`;
-todaySales.forEach((s,i)=>{
-report += `\nالفاتورة ${i+1} - ${s.time}\n`;
-s.items.forEach(it=>{
-report += `- ${it.name} x ${it.qty} = ${(it.price*it.qty).toLocaleString()} د.ع\n`;
-});
-report += `المجموع: ${s.total.toLocaleString()} د.ع | الربح: ${s.profit.toLocaleString()} د.ع\n`;
-});
-if(todaySales.length==0) report += "لا توجد مبيعات اليوم";
-alert(report);
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-loadFromLocal();
-loadCart();
-});
+applyTranslations(); // يطبق اللغة المحفوظة
+loadProducts();
 </script>
 </body>
 </html>
